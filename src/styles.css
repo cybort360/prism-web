@@ -1,0 +1,228 @@
+@import "tailwindcss" source(none);
+@source "../src";
+
+@theme inline {
+  --radius-sm: 2px;
+  --radius-md: 2px;
+  --radius-lg: 4px;
+  --radius-xl: 4px;
+  --radius-2xl: 4px;
+  --radius-3xl: 4px;
+  --radius-4xl: 4px;
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-line: var(--line);
+  --color-ink: var(--ink);
+  --color-canvas: var(--canvas);
+  --color-paper: var(--paper);
+  --color-surface-dark: var(--surface-dark);
+  --color-surface-dark-2: var(--surface-dark-2);
+  --color-surface-dark-foreground: var(--surface-dark-foreground);
+  --color-surface-dark-muted: var(--surface-dark-muted);
+  --color-jade: var(--jade);
+  --color-jade-strong: var(--jade-strong);
+  --color-jade-foreground: var(--jade-foreground);
+  --color-mint: var(--mint);
+  --color-mint-pale: var(--mint-pale);
+  --font-display: var(--font-display-stack);
+  --font-sans: var(--font-sans-stack);
+  --font-mono: var(--font-mono-stack);
+}
+@font-face {
+  font-family: "F5.6";
+  src:
+    url("/fonts/f56.woff2") format("woff2"),
+    url("/fonts/f56.woff") format("woff");
+  font-weight: 100 900;
+  font-display: swap;
+}
+:root {
+  --font-display-stack: "F5.6", "Space Grotesk", "Inter Tight", system-ui, sans-serif;
+  --font-sans-stack: "Inter", "Inter Tight", system-ui, sans-serif;
+  --font-mono-stack: "IBM Plex Mono", "Roboto Mono", ui-monospace, monospace;
+
+  /* Canonical Prism brand tokens (sRGB hex, matches mobile app) */
+  --prism-deep: #0b2624;
+  --prism-deepest: #071b1a;
+  --prism-jade: #3fb69a;
+  --prism-jade-pressed: #1b7a64; /* deep jade — darkened from #238A75 to clear WCAG AA for small accent text on light/mint */
+  --prism-mint: #ddf2ea;
+  --prism-mint-pale: #edf8f4;
+  --canvas: #f7f8f5;
+  --paper: #fcfcfa;
+  --ink: #111615;
+  --hairline: #d9dfdb;
+
+  /* Semantic mapping */
+  --background: var(--canvas);
+  --foreground: var(--ink);
+  --muted: #ecefeb; /* cool neutral surface fill (hover/rest) */
+  --muted-foreground: #636a66; /* muted text — darkened from #747C78 to clear WCAG AA (4.5:1) on canvas/paper */
+  --line: var(--hairline);
+
+  --surface-dark: var(--prism-deepest);
+  --surface-dark-2: var(--prism-deep);
+  --surface-dark-foreground: #e9f4ef; /* warm mint-white body on teal */
+  --surface-dark-muted: #8fb3aa; /* muted mint on teal */
+
+  --jade: var(--prism-jade); /* bright: rings, dots, fills, focus */
+  --jade-strong: var(--prism-jade-pressed); /* deep: accent text on light */
+  --jade-foreground: var(--prism-deepest); /* text on jade fills */
+  --mint: var(--prism-mint);
+  --mint-pale: var(--prism-mint-pale);
+
+  --primary: var(--ink);
+  --primary-foreground: var(--paper);
+  --ease-mech: cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+@layer base {
+  * {
+    border-color: var(--color-line);
+    box-sizing: border-box;
+  }
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 5rem;
+    -webkit-font-smoothing: antialiased;
+  }
+  body {
+    margin: 0;
+    background-color: var(--color-background);
+    color: var(--color-foreground);
+    font-family: var(--font-sans-stack);
+    font-feature-settings: "cv05", "ss01";
+  }
+  button,
+  a {
+    font: inherit;
+  }
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
+  ::selection {
+    background: var(--mint);
+    color: var(--jade-strong);
+  }
+  :focus-visible {
+    outline: 2px solid var(--jade);
+    outline-offset: 3px;
+  }
+}
+@utility shell {
+  width: 100%;
+  max-width: 1440px;
+  margin-inline: auto;
+  padding-inline: 1.25rem;
+}
+@media (min-width: 768px) {
+  .shell {
+    padding-inline: 3rem;
+  }
+}
+@media (min-width: 1728px) {
+  .shell {
+    max-width: 1600px;
+  }
+}
+@utility mono-label {
+  font-family: var(--font-mono-stack);
+  font-size: 0.6875rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--muted-foreground);
+}
+@utility display {
+  font-family: var(--font-display-stack);
+  font-weight: 700;
+  line-height: 0.9;
+  letter-spacing: -0.035em;
+  text-transform: uppercase;
+}
+
+/* Deep teal editorial ground — subtle top-left tonal glow, no blobs, no crypto gradient */
+@utility deep {
+  background-color: var(--surface-dark);
+  color: var(--surface-dark-foreground);
+  background-image: radial-gradient(120% 90% at 12% -12%, #0f3330 0%, #0b2624 46%, #071b1a 100%);
+}
+
+/* Mobile-product UI material (the app's floating cards) */
+@utility app-card {
+  background: var(--color-paper);
+  border-radius: 22px;
+  box-shadow: 0 18px 60px rgba(5, 24, 22, 0.08);
+}
+@utility app-chip {
+  display: inline-grid;
+  place-items: center;
+  background: var(--color-mint);
+  border-radius: 12px;
+  color: var(--color-jade-strong);
+}
+
+/* Contextual overrides inside deep sections */
+.deep .mono-label {
+  color: var(--surface-dark-muted);
+}
+
+@keyframes prism-rise {
+  from {
+    transform: translateY(110%);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+@keyframes prism-fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+@utility clip-line {
+  display: block;
+  overflow: hidden;
+}
+@utility clip-line-inner {
+  display: block;
+  animation: prism-rise 520ms var(--ease-mech) both;
+}
+@utility anim-fade-up {
+  animation: prism-fade-up 300ms var(--ease-mech) both;
+}
+.reveal {
+  opacity: 0;
+  transform: translateY(14px);
+  transition:
+    opacity 320ms var(--ease-mech),
+    transform 320ms var(--ease-mech);
+}
+.reveal[data-visible="true"] {
+  opacity: 1;
+  transform: none;
+}
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+  .reveal {
+    opacity: 1;
+    transform: none;
+  }
+}
