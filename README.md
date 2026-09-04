@@ -114,6 +114,13 @@ section 07 (`Integration target` / `Testnet` / `Demo data`) — the site makes n
 are added, the site falls back to Space Grotesk / Inter Tight / system sans. Body text uses
 Inter; mono metadata uses IBM Plex Mono / Roboto Mono.
 
+## Brand assets
+
+- `public/prism-mark.png` is the transparent 1024px Prism mark master.
+- `public/favicon.ico` and the PNG favicon sizes support browsers and pinned shortcuts.
+- `public/apple-touch-icon.png` and `public/site.webmanifest` support mobile home screens.
+- `public/og.png` is the 1200 × 630 social preview used by Open Graph and X cards.
+
 ## Documentation
 
 - [`DESIGN_SYSTEM.md`](./DESIGN_SYSTEM.md) — exact tokens, type scale, utilities, motion.
