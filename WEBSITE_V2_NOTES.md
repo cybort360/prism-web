@@ -68,7 +68,7 @@ at 1600px from 1728px up so ultrawide does not stretch.
   a labelled access/status panel, and an access CTA. `/docs` and `/whitepaper` are long-form
   content pages sharing `dockit.tsx` (layout + prose/code/table primitives). Footer links: Product,
   Security, Proof, Developers, Docs, Whitepaper are internal; "GitHub" opens
-  `https://github.com/cybort360/prism` in a new tab. Section links use `/#id` so they work from any
+  `https://github.com/cybort360/prism-web` in a new tab. Section links use `/#id` so they work from any
   route (a small `ScrollManager` handles hash targets and top-on-route-change). No footer
   placeholders remain.
 - Display headings are uppercase via `.display`; the app uses mixed case. Left uppercase as the

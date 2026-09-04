@@ -272,7 +272,7 @@ const FOOTER_LINKS: FooterLink[] = [
   { label: "Developers", to: "/developers" },
   { label: "Docs", to: "/docs" },
   { label: "Whitepaper", to: "/whitepaper" },
-  { label: "GitHub", to: "https://github.com/cybort360/prism" },
+  { label: "GitHub", to: "https://github.com/cybort360/prism-web" },
 ];
 const footerLinkClass =
   "font-mono text-[11px] uppercase tracking-[0.14em] text-surface-dark-foreground/70 transition-colors duration-200 hover:text-surface-dark-foreground";

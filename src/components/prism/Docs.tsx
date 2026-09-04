@@ -71,7 +71,7 @@ const GROUPS: TocGroup[] = [
     items: [
       { id: "s33", n: "34", title: "FAQ" },
       { href: "/whitepaper", title: "Whitepaper" },
-      { href: "https://github.com/cybort360/prism", title: "GitHub" },
+      { href: "https://github.com/cybort360/prism-web", title: "GitHub" },
     ],
   },
 ];
