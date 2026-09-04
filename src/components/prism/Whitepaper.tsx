@@ -51,7 +51,7 @@ export function WhitepaperPage() {
             their money.
           </p>
           <div className="mt-8">
-            <Mono className="text-surface-dark-muted">Version 1.0 — Monad Metropolis 2026</Mono>
+            <Mono className="text-surface-dark-muted">Version 1.0 · Monad Metropolis 2026</Mono>
           </div>
         </>
       }
@@ -165,7 +165,7 @@ S = application state and history`}</Pre>
           The Prism v1 resolver is a trusted privacy boundary. It is not presented as a zero-knowledge contact-discovery
           protocol.
         </Lead>
-        <P>Future research directions — not current capability:</P>
+        <P>Future research directions, not current capability:</P>
         <Ul items={["OPRFs", "Private set intersection", "Hardware enclaves", "Oblivious contact discovery"]} />
       </Section>
 

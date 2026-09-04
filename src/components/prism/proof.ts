@@ -1,5 +1,5 @@
-// Typed proof-data model. The proof surface renders whatever it is handed —
-// when live evidence exists, pass a real PrismProof instead of DEMO_PROOF.
+// Typed proof-data model. The proof surface renders whatever it is handed.
+// When live evidence exists, pass a real PrismProof instead of DEMO_PROOF.
 // No markup changes required to go from demo → testnet → mainnet.
 export type PrismProof = {
   environment: "demo" | "testnet" | "mainnet";

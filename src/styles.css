@@ -49,7 +49,7 @@
   --prism-deep: #0b2624;
   --prism-deepest: #071b1a;
   --prism-jade: #3fb69a;
-  --prism-jade-pressed: #1b7a64; /* deep jade — darkened from #238A75 to clear WCAG AA for small accent text on light/mint */
+  --prism-jade-pressed: #1b7a64; /* deep jade, darkened from #238A75 to clear WCAG AA for small accent text on light/mint */
   --prism-mint: #ddf2ea;
   --prism-mint-pale: #edf8f4;
   --canvas: #f7f8f5;
@@ -61,7 +61,7 @@
   --background: var(--canvas);
   --foreground: var(--ink);
   --muted: #ecefeb; /* cool neutral surface fill (hover/rest) */
-  --muted-foreground: #636a66; /* muted text — darkened from #747C78 to clear WCAG AA (4.5:1) on canvas/paper */
+  --muted-foreground: #636a66; /* muted text, darkened from #747C78 to clear WCAG AA (4.5:1) on canvas/paper */
   --line: var(--hairline);
 
   --surface-dark: var(--prism-deepest);
@@ -144,7 +144,7 @@
   text-transform: uppercase;
 }
 
-/* Deep teal editorial ground — subtle top-left tonal glow, no blobs, no crypto gradient */
+/* Deep teal editorial ground: subtle top-left tonal glow, no blobs, no crypto gradient */
 @utility deep {
   background-color: var(--surface-dark);
   color: var(--surface-dark-foreground);

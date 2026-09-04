@@ -193,7 +193,7 @@ function PeopleSendCard({ sel, sent, onConfirm }: { sel: Contact; sent: boolean;
             onClick={onConfirm}
             className="w-full rounded-[16px] bg-primary py-3.5 font-mono text-[11px] uppercase tracking-[0.14em] text-primary-foreground transition-colors duration-200 hover:bg-jade hover:text-jade-foreground"
           >
-            {held ? "Send $20.00 · held for claim" : "Confirm · Send $20.00"}
+            Confirm
           </button>
         )}
       </div>
@@ -276,7 +276,7 @@ export function PeopleSection() {
           <div className="lg:pt-4">
             <PeopleSendCard sel={sel} sent={sent} onConfirm={() => setSent(true)} />
             <p className="mt-6 max-w-[42ch] text-[15px] leading-relaxed text-muted-foreground">
-              Select a person. Prism resolves them to an account — you never touch an address.
+              Select a person. Prism resolves them to an account, so you never touch an address.
             </p>
           </div>
         </div>
@@ -474,7 +474,7 @@ export function CrossBorderSection() {
             {phase === "settled" ? "Reset" : "Send across border"}
           </button>
           <p className="max-w-[52ch] text-[15px] leading-relaxed text-surface-dark-foreground/75">
-            Prism moves AUSD between human-addressed accounts across borders — without making either person handle a
+            Prism moves AUSD between human-addressed accounts across borders without making either person handle a
             wallet address.
           </p>
         </div>
@@ -589,7 +589,7 @@ export function ClaimSection() {
                     onClick={claim}
                     className="w-full rounded-[18px] bg-primary py-4 font-mono text-[12px] uppercase tracking-[0.14em] text-primary-foreground transition-colors duration-200 hover:bg-jade hover:text-jade-foreground"
                   >
-                    Claim $20.00
+                    Claim
                   </button>
                 )}
               </div>
@@ -655,7 +655,7 @@ export function RequestSection() {
               <Avatar initials="JO" ring className="size-12 text-[15px]" />
               <div className="min-w-0">
                 <p className="truncate text-[16px] font-medium text-ink">Jayson Okafor</p>
-                <Mono className="text-muted-foreground">requested · Lunch</Mono>
+                <Mono className="text-muted-foreground">requested for lunch</Mono>
               </div>
             </div>
             <div className="px-6 pt-6">
@@ -710,7 +710,7 @@ export function RequestSection() {
           {/* state machine */}
           <div className="lg:pt-4">
             <p className="max-w-[40ch] text-[17px] leading-relaxed text-muted-foreground md:text-[19px]">
-              A request is a state machine, not a message. Every request resolves — one way or another.
+              A request is a state machine, not a message. Every request resolves, one way or another.
             </p>
             <div className="mt-8 grid grid-cols-2 gap-2 sm:grid-cols-3">
               {REQ_STATES.map((s) => (

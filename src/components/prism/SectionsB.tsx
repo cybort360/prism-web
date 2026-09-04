@@ -156,14 +156,14 @@ function ProofPanel({ proof }: { proof: PrismProof }) {
   const rows: Array<[string, string]> = [
     ["Network", proof.network],
     ["Asset", proof.asset],
-    ["Account", demo ? `${proof.account ?? "0x…"} · demo until live` : (proof.account ?? "—")],
+    ["Account", demo ? `${proof.account ?? "0x…"} · demo until live` : (proof.account ?? "n/a")],
     ["MON balance", proof.monBalance ?? "0"],
-    ["Payment", proof.amount ?? "—"],
-    ["Status", `${proof.status ?? "—"}${demo ? " · demo" : ""}`],
-    ["Request ID", proof.requestId ?? "—"],
-    ["Tx hash", demo ? `${proof.txHash ?? "0x…"} · demo` : (proof.txHash ?? "—")],
-    ["Indexed", proof.providers.envio ? (demo ? "Envio · demo" : "Envio") : "—"],
-    ["RPC", proof.providers.alchemy ? "Alchemy" : "—"],
+    ["Payment", proof.amount ?? "n/a"],
+    ["Status", `${proof.status ?? "n/a"}${demo ? " · demo" : ""}`],
+    ["Request ID", proof.requestId ?? "n/a"],
+    ["Tx hash", demo ? `${proof.txHash ?? "0x…"} · demo` : (proof.txHash ?? "n/a")],
+    ["Indexed", proof.providers.envio ? (demo ? "Envio · demo" : "Envio") : "n/a"],
+    ["RPC", proof.providers.alchemy ? "Alchemy" : "n/a"],
   ];
   return (
     <div className="mt-14 border border-line">
@@ -188,7 +188,7 @@ function ProofPanel({ proof }: { proof: PrismProof }) {
         <div className="border-t border-line">
           {demo ? (
             <div className="border-b border-line bg-mint-pale px-5 py-3">
-              <Mono className="text-jade-strong">Demo data — not a live chain record</Mono>
+              <Mono className="text-jade-strong">Demo data, not a live chain record</Mono>
             </div>
           ) : null}
           <dl className="grid font-mono text-[12px] sm:grid-cols-2">
@@ -232,8 +232,8 @@ export function MonadSection() {
           ))}
         </div>
         <p className="mt-8 max-w-[60ch] text-[14px] leading-relaxed text-muted-foreground">
-          Integrations are targets or run against test data. Evidence is labelled per row and in the proof surface below
-          — nothing here is a live mainnet claim.
+          Integrations are targets or run against test data. Evidence is labelled per row and in the proof surface
+          below. Nothing here is a live mainnet claim.
         </p>
         <ProofPanel proof={DEMO_PROOF} />
       </div>

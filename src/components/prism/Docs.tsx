@@ -158,9 +158,9 @@ Mera passkey   → authorizes your money`}</Pre>
         <P>Controlling someone's phone number must not automatically mean controlling their funds.</P>
         <h3 className="mt-8 text-[17px] font-medium text-ink">Monad is canonical</h3>
         <P>
-          Prism does not maintain a private balance database and call it onchain money. Canonical financial facts — AUSD
-          balance, settlement, claim funding, claim completion, refunds — come from Monad. Prism services may cache and
-          index data, but cannot override chain state.
+          Prism does not maintain a private balance database and call it onchain money. Canonical financial facts come
+          from Monad: AUSD balance, settlement, claim funding, claim completion and refunds. Prism services may cache
+          and index data, but cannot override chain state.
         </P>
       </Section>
 
@@ -194,7 +194,7 @@ cd prism
 └── payment history`}</Pre>
         <P>
           Prism Identity should survive phone-number changes, handle changes, device replacement, passkey restoration
-          and alias revocation. It is not intended to become a universal identity protocol — its purpose is continuity
+          and alias revocation. It is not intended to become a universal identity protocol. Its purpose is continuity
           inside the Prism payment system.
         </P>
       </Section>
@@ -256,7 +256,7 @@ AUSD placed in ClaimVault
         ↓
 David receives invitation`}</Pre>
         <P>
-          The sender sees “$20 waiting for David.” The funds are not sent to an unknown wallet — they are held until the
+          The sender sees “$20 waiting for David.” The funds are not sent to an unknown wallet. They are held until the
           intended recipient proves eligibility.
         </P>
       </Section>

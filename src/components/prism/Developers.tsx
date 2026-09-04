@@ -23,14 +23,14 @@ function StatusPill({ kind }: { kind: Status }) {
 }
 
 /* ----------------------------------------------------------------- data */
-// Illustrative preview API — not a published SDK. Comment lines render muted.
+// Illustrative preview API, not a published SDK. Comment lines render muted.
 const QUICKSTART: Array<{ code: string; comment?: boolean }> = [
-  { code: 'import { prism } from "@prism/sdk"; // preview — not yet published', comment: false },
+  { code: 'import { prism } from "@prism/sdk"; // preview, not yet published', comment: false },
   { code: "", comment: true },
   { code: "// resolve a person by handle, phone, or payment link", comment: true },
   { code: 'const to = await prism.resolve("@tobi");', comment: false },
   { code: "", comment: true },
-  { code: "// send dollars — Prism handles authority and settlement", comment: true },
+  { code: "// send dollars; Prism handles authority and settlement", comment: true },
   { code: "await prism.pay({", comment: false },
   { code: "  to,", comment: false },
   { code: '  amount: "20.00", // AUSD', comment: false },
@@ -114,8 +114,8 @@ export function DevelopersPage() {
             </pre>
           </Reveal>
           <p className="mt-4 max-w-[60ch] text-[14px] leading-relaxed text-muted-foreground">
-            Illustrative API. The SDK is an integration target — not yet published. No live keys are required or issued
-            on this page.
+            Illustrative API. The SDK is an integration target and is not yet published. No live keys are required or
+            issued on this page.
           </p>
         </div>
       </Section>
