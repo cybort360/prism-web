@@ -167,11 +167,15 @@ export function DevelopersPage() {
                     i % 2 === 0 && "sm:border-r",
                   )}
                 >
-                  <div className="min-w-0">
-                    <dt className="font-mono text-[10px] uppercase tracking-[0.14em] text-muted-foreground">{label}</dt>
-                    <dd className="mt-1 truncate font-mono text-[13px] text-ink">{value}</dd>
-                  </div>
-                  <StatusPill kind={status} />
+                  <dt className="min-w-0">
+                    <span className="block font-mono text-[10px] uppercase tracking-[0.14em] text-muted-foreground">
+                      {label}
+                    </span>
+                  </dt>
+                  <dd className="flex min-w-0 items-center gap-4">
+                    <span className="min-w-0 flex-1 truncate font-mono text-[13px] text-ink">{value}</span>
+                    <StatusPill kind={status} />
+                  </dd>
                 </div>
               ))}
             </dl>

@@ -158,7 +158,7 @@ function PeopleSendCard({ sel, sent, onConfirm }: { sel: Contact; sent: boolean;
     <div className="app-card overflow-hidden">
       <div className="flex items-center justify-between px-6 pt-5">
         <Mono className="text-muted-foreground">Send</Mono>
-        <Mono className="text-muted-foreground/70">Prism</Mono>
+        <Mono className="text-muted-foreground">Prism</Mono>
       </div>
       <div className="flex items-center gap-4 px-6 pt-5">
         <Avatar initials={sel.initials} ring={sel.onPrism} className="size-12 text-[15px]" />
@@ -180,7 +180,10 @@ function PeopleSendCard({ sel, sent, onConfirm }: { sel: Contact; sent: boolean;
       </div>
       <div className="px-6 pb-6 pt-6">
         {sent ? (
-          <div className="flex items-center justify-between rounded-[16px] bg-jade px-4 py-3 text-jade-foreground">
+          <div
+            key="sent"
+            className="state-enter flex items-center justify-between rounded-[16px] bg-jade px-4 py-3 text-jade-foreground"
+          >
             <span className="flex items-center gap-2 text-[14px] font-medium">
               <Ic.check className="size-4" />
               {held ? "Locked" : "Sent"}
@@ -189,9 +192,10 @@ function PeopleSendCard({ sel, sent, onConfirm }: { sel: Contact; sent: boolean;
           </div>
         ) : (
           <button
+            key="confirm"
             type="button"
             onClick={onConfirm}
-            className="w-full rounded-[16px] bg-primary py-3.5 font-mono text-[11px] uppercase tracking-[0.14em] text-primary-foreground transition-colors duration-200 hover:bg-jade hover:text-jade-foreground"
+            className="press-feedback state-enter w-full rounded-[16px] bg-primary py-3.5 font-mono text-[11px] uppercase tracking-[0.14em] text-primary-foreground hover:bg-jade hover:text-jade-foreground"
           >
             Confirm
           </button>
@@ -395,7 +399,7 @@ function BorderAccount({
         <p
           className={cn(
             "display mt-1 text-[34px] leading-none tabular-nums transition-colors duration-300 sm:text-[38px]",
-            muted ? "text-line" : "text-ink",
+            muted ? "text-muted-foreground" : "text-ink",
           )}
         >
           {amount}
@@ -469,7 +473,7 @@ export function CrossBorderSection() {
           <button
             type="button"
             onClick={send}
-            className="inline-flex h-11 items-center rounded-full bg-jade px-6 font-mono text-[11px] uppercase tracking-[0.14em] text-jade-foreground transition-colors duration-200 hover:bg-jade-strong"
+            className="press-feedback inline-flex h-11 items-center rounded-full bg-jade px-6 font-mono text-[11px] uppercase tracking-[0.14em] text-jade-foreground hover:bg-jade-strong"
           >
             {phase === "settled" ? "Reset" : "Send across border"}
           </button>
@@ -570,14 +574,20 @@ export function ClaimSection() {
               </p>
               <div className="mt-8">
                 {i >= 4 ? (
-                  <div className="flex items-center justify-between rounded-[18px] bg-jade px-5 py-4 text-jade-foreground">
+                  <div
+                    key="claimed"
+                    className="state-enter flex items-center justify-between rounded-[18px] bg-jade px-5 py-4 text-jade-foreground"
+                  >
                     <span className="flex items-center gap-2 text-[15px] font-medium">
                       <Ic.check className="size-5" /> Claimed
                     </span>
                     <Mono className="text-jade-foreground/70">$20.00 · Settled</Mono>
                   </div>
                 ) : claiming ? (
-                  <div className="flex items-center gap-3 rounded-[18px] bg-mint-pale px-5 py-4 text-jade-strong">
+                  <div
+                    key={`claiming-${i}`}
+                    className="state-enter flex items-center gap-3 rounded-[18px] bg-mint-pale px-5 py-4 text-jade-strong"
+                  >
                     <Ic.spin className="size-5" />
                     <span className="text-[15px] font-medium">
                       {i === 2 ? "David is joining…" : "Verifying passkey…"}
@@ -585,9 +595,10 @@ export function ClaimSection() {
                   </div>
                 ) : (
                   <button
+                    key="claim"
                     type="button"
                     onClick={claim}
-                    className="w-full rounded-[18px] bg-primary py-4 font-mono text-[12px] uppercase tracking-[0.14em] text-primary-foreground transition-colors duration-200 hover:bg-jade hover:text-jade-foreground"
+                    className="press-feedback state-enter w-full rounded-[18px] bg-primary py-4 font-mono text-[12px] uppercase tracking-[0.14em] text-primary-foreground hover:bg-jade hover:text-jade-foreground"
                   >
                     Claim
                   </button>
@@ -597,7 +608,7 @@ export function ClaimSection() {
                 <button
                   type="button"
                   onClick={() => setI(0)}
-                  className="mt-4 font-mono text-[11px] uppercase tracking-[0.14em] text-muted-foreground transition-colors hover:text-ink"
+                  className="press-feedback mt-4 font-mono text-[11px] uppercase tracking-[0.14em] text-muted-foreground hover:text-ink"
                 >
                   Replay
                 </button>
@@ -649,7 +660,7 @@ export function RequestSection() {
           <div className="app-card overflow-hidden">
             <div className="flex items-center justify-between px-6 pt-5">
               <Mono className="text-muted-foreground">Incoming request</Mono>
-              <Mono className="text-muted-foreground/70">Prism</Mono>
+              <Mono className="text-muted-foreground">Prism</Mono>
             </div>
             <div className="flex items-center gap-4 px-6 pt-5">
               <Avatar initials="JO" ring className="size-12 text-[15px]" />
@@ -664,25 +675,28 @@ export function RequestSection() {
             </div>
             <div className="px-6 pb-6 pt-6">
               {state === "OPEN" && !busy && (
-                <div className="flex gap-3">
+                <div key="open" className="state-enter flex gap-3">
                   <button
                     type="button"
                     onClick={() => reset("DECLINED")}
-                    className="flex-1 rounded-[16px] border border-line py-3.5 font-mono text-[11px] uppercase tracking-[0.14em] text-ink transition-colors duration-200 hover:bg-muted"
+                    className="press-feedback flex-1 rounded-[16px] border border-line py-3.5 font-mono text-[11px] uppercase tracking-[0.14em] text-ink hover:bg-muted"
                   >
                     Decline
                   </button>
                   <button
                     type="button"
                     onClick={pay}
-                    className="flex-1 rounded-[16px] bg-primary py-3.5 font-mono text-[11px] uppercase tracking-[0.14em] text-primary-foreground transition-colors duration-200 hover:bg-jade hover:text-jade-foreground"
+                    className="press-feedback flex-1 rounded-[16px] bg-primary py-3.5 font-mono text-[11px] uppercase tracking-[0.14em] text-primary-foreground hover:bg-jade hover:text-jade-foreground"
                   >
                     Pay $15.00
                   </button>
                 </div>
               )}
               {busy && (
-                <div className="flex items-center gap-3 rounded-[16px] bg-mint-pale px-4 py-3.5 text-jade-strong">
+                <div
+                  key={phase}
+                  className="state-enter flex items-center gap-3 rounded-[16px] bg-mint-pale px-4 py-3.5 text-jade-strong"
+                >
                   <Ic.spin className="size-5" />
                   <span className="text-[14px] font-medium">
                     {phase === "authorize" ? "Face ID · Authorize" : "Settling on Monad…"}
@@ -691,8 +705,9 @@ export function RequestSection() {
               )}
               {state !== "OPEN" && !busy && (
                 <div
+                  key={state}
                   className={cn(
-                    "flex items-center justify-between rounded-[16px] px-4 py-3.5",
+                    "state-enter flex items-center justify-between rounded-[16px] px-4 py-3.5",
                     state === "PAID" ? "bg-jade text-jade-foreground" : "bg-muted text-muted-foreground",
                   )}
                 >
@@ -720,7 +735,7 @@ export function RequestSection() {
                   onClick={() => reset(s)}
                   aria-pressed={state === s && !busy}
                   className={cn(
-                    "rounded-[10px] px-4 py-4 text-left font-mono text-[11px] uppercase tracking-[0.12em] transition-colors duration-200",
+                    "press-feedback rounded-[10px] px-4 py-4 text-left font-mono text-[11px] uppercase tracking-[0.12em]",
                     state === s && !busy
                       ? "bg-primary text-primary-foreground"
                       : "border border-line text-muted-foreground hover:bg-muted hover:text-ink",
@@ -732,7 +747,7 @@ export function RequestSection() {
               <button
                 type="button"
                 onClick={() => reset("OPEN")}
-                className="rounded-[10px] px-4 py-4 text-left font-mono text-[11px] uppercase tracking-[0.12em] text-jade-strong transition-colors duration-200 hover:bg-mint-pale"
+                className="press-feedback rounded-[10px] px-4 py-4 text-left font-mono text-[11px] uppercase tracking-[0.12em] text-jade-strong hover:bg-mint-pale"
               >
                 Reset ↺
               </button>

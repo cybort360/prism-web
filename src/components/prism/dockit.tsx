@@ -121,7 +121,7 @@ export function DocLayout({ groups, hero, children }: { groups: TocGroup[]; hero
           <nav aria-label="Contents" className="mt-4 flex flex-col gap-5">
             {groups.map((g, gi) => (
               <div key={gi} className="flex flex-col gap-1.5">
-                {g.label ? <p className="mono-label pl-5 text-muted-foreground/70">{g.label}</p> : null}
+                {g.label ? <p className="mono-label pl-5 text-muted-foreground">{g.label}</p> : null}
                 {g.items.map((item) => (
                   <TocLink key={item.title} item={item} />
                 ))}

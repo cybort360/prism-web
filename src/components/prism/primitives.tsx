@@ -88,7 +88,7 @@ export function PrismButton({
   ...rest
 }: ButtonProps) {
   const base =
-    "inline-flex items-center justify-center gap-2 rounded-[2px] font-mono text-[11px] uppercase tracking-[0.14em] transition-all duration-200 ease-out active:translate-y-px disabled:opacity-40 disabled:pointer-events-none";
+    "press-feedback inline-flex items-center justify-center gap-2 rounded-[2px] font-mono text-[11px] uppercase tracking-[0.14em] disabled:pointer-events-none disabled:opacity-40";
   const sizes = size === "sm" ? "h-9 px-4" : "h-12 px-6";
   const variants = {
     solid: "bg-primary text-primary-foreground hover:bg-jade hover:text-jade-foreground",

@@ -94,7 +94,7 @@ function ProductFragment() {
       {/* header */}
       <div className="flex items-center justify-between px-6 pt-5">
         <Mono className="text-muted-foreground">Send</Mono>
-        <Mono className="text-muted-foreground/70">Prism</Mono>
+        <Mono className="text-muted-foreground">Prism</Mono>
       </div>
 
       {/* identity */}
@@ -119,14 +119,14 @@ function ProductFragment() {
         <p
           className={cn(
             "display mt-2 text-[52px] leading-none tabular-nums transition-colors duration-300 sm:text-[56px]",
-            funded ? "text-ink" : "text-line",
+            funded ? "text-ink" : "text-muted-foreground",
           )}
         >
           {amount}
         </p>
         <div
           className={cn(
-            "mt-3 flex items-center gap-2 overflow-hidden transition-all duration-300",
+            "mt-3 flex items-center gap-2 overflow-hidden transition-[max-height,opacity] duration-300",
             funded ? "max-h-8 opacity-100" : "max-h-0 opacity-0",
           )}
         >
@@ -137,7 +137,7 @@ function ProductFragment() {
 
       {/* status */}
       <div className="px-6 pb-5 pt-6">
-        <StatusRow stageKey={STAGES[i]!.key} authPhase={authPhase} />
+        <StatusRow key={`${STAGES[i]!.key}-${authPhase}`} stageKey={STAGES[i]!.key} authPhase={authPhase} />
       </div>
 
       {/* segmented state control */}
@@ -155,7 +155,7 @@ function ProductFragment() {
               onClick={() => select(idx)}
               aria-pressed={idx === i}
               className={cn(
-                "relative z-10 flex-1 py-2 font-mono text-[10px] uppercase tracking-[0.1em] transition-colors duration-200",
+                "press-feedback relative z-10 flex-1 py-2 font-mono text-[10px] uppercase tracking-[0.1em]",
                 idx === i ? "text-ink" : "text-muted-foreground hover:text-foreground",
               )}
             >
@@ -177,7 +177,7 @@ function StatusRow({
 }) {
   if (stageKey === "sent") {
     return (
-      <div className="flex items-center justify-between rounded-[16px] bg-jade px-4 py-3 text-jade-foreground">
+      <div className="state-enter flex items-center justify-between rounded-[16px] bg-jade px-4 py-3 text-jade-foreground">
         <span className="flex items-center gap-2 text-[14px] font-medium">
           <CheckIcon className="size-4" /> Sent
         </span>
@@ -187,7 +187,7 @@ function StatusRow({
   }
   if (stageKey === "authorize") {
     return (
-      <div className="flex items-center gap-3 rounded-[16px] bg-mint-pale px-4 py-3 text-jade-strong">
+      <div className="state-enter flex items-center gap-3 rounded-[16px] bg-mint-pale px-4 py-3 text-jade-strong">
         {authPhase === "face" ? (
           <>
             <FaceIdIcon className="size-5" />
@@ -207,14 +207,14 @@ function StatusRow({
   }
   if (stageKey === "amount") {
     return (
-      <div className="flex items-center gap-2 rounded-[16px] border border-line px-4 py-3 text-jade-strong">
+      <div className="state-enter flex items-center gap-2 rounded-[16px] border border-line px-4 py-3 text-jade-strong">
         <span aria-hidden="true" className="size-1.5 rounded-full bg-jade" />
         <span className="text-[14px] font-medium">Ready to send</span>
       </div>
     );
   }
   return (
-    <div className="rounded-[16px] bg-muted px-4 py-3 text-[14px] text-muted-foreground">
+    <div className="state-enter rounded-[16px] bg-muted px-4 py-3 text-[14px] text-muted-foreground">
       Choose an amount to continue
     </div>
   );

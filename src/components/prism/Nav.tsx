@@ -88,7 +88,7 @@ export function Nav() {
             aria-label="Toggle navigation"
             onClick={() => setOpen((v) => !v)}
             className={cn(
-              "font-mono text-[11px] tracking-[0.14em] uppercase transition-colors duration-200 md:hidden",
+              "press-feedback font-mono text-[11px] tracking-[0.14em] uppercase md:hidden",
               dark ? "text-surface-dark-foreground" : "text-foreground",
             )}
           >
@@ -96,14 +96,15 @@ export function Nav() {
           </button>
         </div>
       </div>
-      {open ? (
-        <nav aria-label="Mobile" className="border-t border-line bg-background md:hidden">
+      <div className="mobile-nav-shell" data-open={open} aria-hidden={!open}>
+        <nav aria-label="Mobile" className="border-t border-line bg-background">
           <ul className="shell flex flex-col py-2">
             {[...LINKS, { label: "Get Prism ↗", to: "/#get" }].map((l) => (
               <li key={l.label} className="border-b border-line last:border-b-0">
                 <Link
                   to={l.to}
                   onClick={() => setOpen(false)}
+                  tabIndex={open ? undefined : -1}
                   className="block py-3 font-mono text-[11px] tracking-[0.14em] uppercase"
                 >
                   {l.label}
@@ -112,7 +113,7 @@ export function Nav() {
             ))}
           </ul>
         </nav>
-      ) : null}
+      </div>
     </header>
   );
 }

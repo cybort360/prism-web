@@ -94,14 +94,18 @@ export function AuthoritySection() {
           </p>
           <p className="mt-2 text-[15px] text-muted-foreground">Review before sending.</p>
           {reviewed ? (
-            <p className="mt-6 inline-flex items-center gap-2 font-mono text-[11px] uppercase tracking-[0.14em] text-jade-strong">
+            <p
+              key="reviewed"
+              className="state-enter mt-6 inline-flex items-center gap-2 font-mono text-[11px] uppercase tracking-[0.14em] text-jade-strong"
+            >
               Reviewed ✓
             </p>
           ) : (
             <button
+              key="review"
               type="button"
               onClick={() => setReviewed(true)}
-              className="mt-6 inline-flex h-11 items-center rounded-full bg-primary px-6 font-mono text-[11px] uppercase tracking-[0.14em] text-primary-foreground transition-colors duration-200 hover:bg-jade hover:text-jade-foreground"
+              className="press-feedback state-enter mt-6 inline-flex h-11 items-center rounded-full bg-primary px-6 font-mono text-[11px] uppercase tracking-[0.14em] text-primary-foreground hover:bg-jade hover:text-jade-foreground"
             >
               Review
             </button>
@@ -171,7 +175,7 @@ function ProofPanel({ proof }: { proof: PrismProof }) {
         type="button"
         onClick={() => setOpen((o) => !o)}
         aria-expanded={open}
-        className="flex w-full items-center justify-between gap-4 px-5 py-4 text-left transition-colors duration-200 hover:bg-muted"
+        className="press-feedback flex w-full items-center justify-between gap-4 px-5 py-4 text-left hover:bg-muted"
       >
         <span className="flex items-center gap-3">
           <Mono className="text-foreground">Proof surface</Mono>
