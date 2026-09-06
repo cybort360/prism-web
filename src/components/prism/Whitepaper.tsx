@@ -69,7 +69,7 @@ export function WhitepaperPage() {
           cryptographic authority over funds.
         </P>
         <P>
-          AUSD serves as the payment asset while Monad provides canonical settlement. A protected resolver maps private
+          USDC serves as the payment asset while Monad provides canonical settlement. A protected resolver maps private
           human aliases to recipient identities without publishing a globally enumerable phone directory onchain.
           Recipients who have not yet joined Prism can still receive value through expiring claims that are redeemable
           after identity verification and safely refundable if never claimed.
@@ -126,7 +126,7 @@ WHO CAN AUTHORIZE MY MONEY
 Mera passkey account
         ↓
 WHERE VALUE SETTLES
-AUSD on Monad`}</Pre>
+USDC on Monad`}</Pre>
         <Lead>
           Identity continuity does not require authority continuity, and authority must never be inferred merely from
           reachability.
@@ -190,7 +190,7 @@ S = application state and history`}</Pre>
           with a token portfolio. This reduces:
         </P>
         <Ul items={["Asset ambiguity", "Pricing confusion", "Liquidity fragmentation", "UI complexity"]} />
-        <P>AUSD becomes the unit users see as dollars.</P>
+        <P>USDC becomes the unit users see as dollars.</P>
       </Section>
 
       <Section id="s9" n="09" title="Gas abstraction">
@@ -200,7 +200,7 @@ S = application state and history`}</Pre>
 
 must not prevent:
 
-  Transfer(AUSD, payer, recipient, amount)`}</Pre>
+  Transfer(USDC, payer, recipient, amount)`}</Pre>
         <P>
           Prism uses authorization plus relayed execution. The user pays in the asset they understand; the network token
           remains infrastructure.
@@ -277,7 +277,7 @@ MeraSign(P)`}</Pre>
       <Section id="s15" n="15" title="Cross-border model">
         <P>
           Prism is cross-border at the digital-dollar settlement layer. Users in different jurisdictions can exchange
-          AUSD using human identifiers.
+          USDC using human identifiers.
         </P>
         <P>Prism does not itself claim, unless those mechanisms are subsequently integrated:</P>
         <Ul items={["Fiat FX", "Local bank settlement", "Regulatory licensing", "Off-ramp coverage"]} />
@@ -287,7 +287,7 @@ MeraSign(P)`}</Pre>
         <KV
           head={["Fact", "Canonical source"]}
           rows={[
-            ["AUSD balance", "Monad"],
+            ["USDC balance", "Monad"],
             ["Payment completion", "Monad"],
             ["Claim funds", "ClaimVault"],
             ["Alias mapping", "Prism Resolver"],
@@ -312,7 +312,7 @@ MeraSign(P)`}</Pre>
         <P>Assets:</P>
         <Ul
           items={[
-            "User AUSD",
+            "User USDC",
             "Mera authority",
             "Phone aliases",
             "Handle aliases",
@@ -392,7 +392,7 @@ MeraSign(P)`}</Pre>
                   │
        ┌──────────┼───────────┐
        │          │           │
-      Mera       AUSD       Envio
+      Mera       USDC       Envio
    Authority     Money      History
        │          │           │
        └──────────┼───────────┘
@@ -404,7 +404,7 @@ MeraSign(P)`}</Pre>
         <KV
           rows={[
             ["Mera", "Account authority."],
-            ["AUSD", "The money being moved."],
+            ["USDC", "The money being moved."],
             ["Envio", "Indexed history."],
             ["Monad", "Settlement."],
             ["Alchemy", "Live chain access."],
@@ -448,7 +448,7 @@ MeraSign(P)`}</Pre>
       <Section id="s26" n="26" title="Scope">
         <Ul
           items={[
-            "iPhone · Monad · AUSD",
+            "iPhone · Monad · USDC",
             "Phone aliases · @handles · QR · payment links",
             "Direct payments · payment requests",
             "Pre-user claims · refunds",
@@ -503,7 +503,7 @@ MeraSign(P)`}</Pre>
         />
         <P>
           Any public Prism claim must match the achieved evidence level. “Prism supports claims” is valid as a live
-          protocol capability only if a claim plus claim readback exists. “Prism uses AUSD on Monad” requires real
+          protocol capability only if a claim plus claim readback exists. “Prism uses USDC on Monad” requires real
           configured and deployed execution proof.
         </P>
       </Section>
@@ -534,7 +534,7 @@ MeraSign(P)`}</Pre>
         </P>
         <P>
           A person may be found through a phone number, handle, QR code or link. Those identifiers remain replaceable
-          reachability mechanisms. Financial authority belongs to a passkey-controlled Mera account. AUSD represents the
+          reachability mechanisms. Financial authority belongs to a passkey-controlled Mera account. USDC represents the
           value being transferred. Monad provides canonical settlement. Prism coordinates the relationship between those
           layers while keeping their complexity beneath a consumer-native interface.
         </P>

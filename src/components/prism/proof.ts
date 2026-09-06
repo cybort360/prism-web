@@ -22,7 +22,7 @@ export type PrismProof = {
 export const DEMO_PROOF: PrismProof = {
   environment: "demo",
   network: "Monad",
-  asset: "AUSD",
+  asset: "USDC",
   account: "0x…",
   monBalance: "0",
   amount: "$20.00",

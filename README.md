@@ -7,7 +7,7 @@ app (deep teal grounds, off-white product cards, jade active states, F5.6 displa
 
 ## What Prism is
 
-- Send and request **dollars** (AUSD) through people, not wallet addresses.
+- Send and request **dollars** (USDC) through people, not wallet addresses.
 - People are identified by phone number, `@handle`, payment QR, or payment link.
 - A **Mera passkey** holds financial authority; **Monad** settles; **Alchemy** provides
   chain access; **Envio** indexes history and proof.
@@ -46,7 +46,7 @@ Phone / @handle
       ↓  Prism resolution
 Mera passkey account        ← financial authority (passkey-bound)
       ↓
-AUSD                        ← dollar-denominated payment asset (Agora)
+USDC                        ← dollar-denominated payment asset
       ↓
 Monad                       ← settlement
 ```
@@ -64,7 +64,7 @@ not reappear in public copy.
 | Hero | Pay people.                | deep teal | Live send sequence (Contact → Amount → Face ID → Sent)     |
 | 01   | People                     | light     | Contact list → live send card                              |
 | 02   | Reachability               | pale mint | Phone / handle / QR / link resolving to one identity       |
-| 03   | Cross-border               | deep teal | Octane (NG) → Sherggs (UK), AUSD over Monad, no fake FX    |
+| 03   | Cross-border               | deep teal | Octane (NG) → Sherggs (UK), USDC over Monad, no fake FX    |
 | 04   | Send before signup         | deep teal | Escrow → claim lifecycle → refund window                   |
 | 05   | Request                    | light     | Incoming request state machine (Pay → Authorize → Settled) |
 | 06   | Security                   | deep teal | Resolution chain, passkey authority, identity-change check |

@@ -33,7 +33,7 @@ const QUICKSTART: Array<{ code: string; comment?: boolean }> = [
   { code: "// send dollars; Prism handles authority and settlement", comment: true },
   { code: "await prism.pay({", comment: false },
   { code: "  to,", comment: false },
-  { code: '  amount: "20.00", // AUSD', comment: false },
+  { code: '  amount: "20.00", // USDC', comment: false },
   { code: '  memo: "Dinner",', comment: false },
   { code: "});", comment: false },
   { code: "// → settles on Monad, indexed by Envio", comment: true },
@@ -41,7 +41,7 @@ const QUICKSTART: Array<{ code: string; comment?: boolean }> = [
 
 const CAPABILITIES: Array<{ name: string; body: string; meta: string }> = [
   { name: "Resolve", body: "Turn a handle, phone number, or payment link into an account.", meta: "Identity" },
-  { name: "Pay & request", body: "Move dollars (AUSD) between people in either direction.", meta: "Payments" },
+  { name: "Pay & request", body: "Move dollars (USDC) between people in either direction.", meta: "Payments" },
   { name: "Authorize", body: "Approve with a Mera passkey. No seed phrases, no addresses.", meta: "Mera" },
   { name: "History", body: "Read indexed payment history and verifiable receipts.", meta: "Envio" },
   {
@@ -53,7 +53,7 @@ const CAPABILITIES: Array<{ name: string; body: string; meta: string }> = [
 
 const ACCESS: Array<{ label: string; value: string; status: Status }> = [
   { label: "Network", value: "Monad", status: "Testnet" },
-  { label: "Asset", value: "AUSD", status: "Testnet" },
+  { label: "Asset", value: "USDC", status: "Testnet" },
   { label: "SDK", value: "@prism/sdk", status: "Integration target" },
   { label: "REST / RPC", value: "via Alchemy", status: "Integration target" },
   { label: "Indexer", value: "Envio", status: "Demo data" },

@@ -456,7 +456,7 @@ export function CrossBorderSection() {
               )}
             />
             <span className="rounded-full bg-white/10 px-2.5 py-1">
-              <Mono className="text-surface-dark-foreground/70">AUSD · Monad</Mono>
+              <Mono className="text-surface-dark-foreground/70">USDC · Monad</Mono>
             </span>
           </div>
           <BorderAccount
@@ -478,13 +478,13 @@ export function CrossBorderSection() {
             {phase === "settled" ? "Reset" : "Send across border"}
           </button>
           <p className="max-w-[52ch] text-[15px] leading-relaxed text-surface-dark-foreground/75">
-            Prism moves AUSD between human-addressed accounts across borders without making either person handle a
+            Prism moves USDC between human-addressed accounts across borders without making either person handle a
             wallet address.
           </p>
         </div>
         <div className="mt-10 flex flex-wrap gap-x-8 gap-y-2 border-t border-white/12 pt-5">
           <Mono className="text-surface-dark-foreground/55">Sender · $0-equiv / 0 MON</Mono>
-          <Mono className="text-surface-dark-foreground/55">AUSD payment</Mono>
+          <Mono className="text-surface-dark-foreground/55">USDC payment</Mono>
           <Mono className="text-surface-dark-foreground/55">Monad settlement</Mono>
         </div>
       </div>

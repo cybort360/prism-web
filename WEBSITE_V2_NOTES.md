@@ -22,7 +22,7 @@ If the site ever looks like "beige V1 with green buttons," the redesign has fail
 - **Nav is `position: fixed`** so deep teal fills under it. Its dark/light treatment is decided
   by scanning `.deep` elements under the nav line (~72px) — any new deep section must carry the
   `.deep` class to get correct nav behaviour.
-- **Final Metropolis architecture.** Phone/@handle → Prism resolution → Mera passkey → AUSD →
+- **Final Metropolis architecture.** Phone/@handle → Prism resolution → Mera passkey → USDC →
   Monad, with Alchemy (RPC) and Envio (indexing). The old Secure Enclave → PrismAccount story is
   retired everywhere in public copy.
 - **Naming.** The recipient in the hero/People flows is **Tobi Kanisuru** (`@tobi`); cross-border

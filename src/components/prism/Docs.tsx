@@ -33,7 +33,7 @@ const GROUPS: TocGroup[] = [
     items: [
       { id: "s27", n: "17", title: "Architecture" },
       { id: "s4", n: "18", title: "Mera accounts" },
-      { id: "s8", n: "19", title: "AUSD" },
+      { id: "s8", n: "19", title: "USDC" },
       { id: "s9", n: "20", title: "Gasless payments" },
       { id: "s6", n: "21", title: "Protected Alias Resolver" },
       { id: "s11", n: "22", title: "Payment intent integrity" },
@@ -101,7 +101,7 @@ export function DocsPage() {
       {/* GETTING STARTED */}
       <Section id="overview" n="01" title="What sits underneath">
         <Lead>
-          Reachability tells Prism who you mean. Mera proves who may authorize money. AUSD is the money being moved.
+          Reachability tells Prism who you mean. Mera proves who may authorize money. USDC is the money being moved.
           Monad is the settlement layer.
         </Lead>
         <Pre>{`PHONE / @HANDLE / QR / LINK
@@ -112,7 +112,7 @@ export function DocsPage() {
         ↓
   MERA PASSKEY ACCOUNT
         ↓
-       AUSD
+       USDC
         ↓
       MONAD
         ↓
@@ -121,7 +121,7 @@ export function DocsPage() {
           rows={[
             ["Reachability", "Tells Prism who you mean."],
             ["Mera", "Proves who may authorize money."],
-            ["AUSD", "The money being moved."],
+            ["USDC", "The money being moved."],
             ["Monad", "The settlement layer."],
             ["Alchemy", "Live chain access."],
             ["Envio", "Indexed activity and evidence."],
@@ -159,7 +159,7 @@ Mera passkey   → authorizes your money`}</Pre>
         <h3 className="mt-8 text-[17px] font-medium text-ink">Monad is canonical</h3>
         <P>
           Prism does not maintain a private balance database and call it onchain money. Canonical financial facts come
-          from Monad: AUSD balance, settlement, claim funding, claim completion and refunds. Prism services may cache
+          from Monad: USDC balance, settlement, claim funding, claim completion and refunds. Prism services may cache
           and index data, but cannot override chain state.
         </P>
       </Section>
@@ -169,7 +169,7 @@ Mera passkey   → authorizes your money`}</Pre>
         <Ul
           items={[
             "Node · Foundry · Xcode · XcodeGen",
-            "Monad RPC · AUSD testnet funds",
+            "Monad RPC · USDC testnet funds",
             "Alchemy credentials · Envio configuration",
             "OTP provider credentials",
           ]}
@@ -226,7 +226,7 @@ Tobi's Prism recipient account`}</Pre>
         <P>The primary payment flow:</P>
         <Pre>{`Select Tobi → Enter $20 → Dinner → Review
    → PIN / Face ID → Mera authorization
-   → AUSD authorization → Prism relay
+   → USDC authorization → Prism relay
    → Monad settlement → Reconciliation → Sent`}</Pre>
         <P>The user only experiences: Tobi · $20 · Face ID · Sent.</P>
       </Section>
@@ -252,7 +252,7 @@ David is not on Prism
         ↓
 Send $20 anyway
         ↓
-AUSD placed in ClaimVault
+USDC placed in ClaimVault
         ↓
 David receives invitation`}</Pre>
         <P>
@@ -282,7 +282,7 @@ Claim authorization created
         ↓
 David authorizes claim
         ↓
-ClaimVault releases AUSD`}</Pre>
+ClaimVault releases USDC`}</Pre>
       </Section>
 
       <Section id="s15" n="11" title="Claim lifecycle">
@@ -310,14 +310,14 @@ ClaimVault releases AUSD`}</Pre>
       <Section id="s17" n="12" title="Cross-border payments">
         <P>
           Prism's payment model is naturally cross-border because recipients are reached using human identifiers while
-          AUSD moves underneath.
+          USDC moves underneath.
         </P>
         <Pre>{`Octane                       Sherggs
-Nigeria    → $20 AUSD →      United Kingdom
+Nigeria    → $20 USDC →      United Kingdom
 +234...                      +44...`}</Pre>
         <P>Prism does not claim to perform FX where no FX mechanism exists. The accurate claim:</P>
         <Lead>
-          AUSD-denominated value can move between human-addressed Prism users across borders without requiring
+          USDC-denominated value can move between human-addressed Prism users across borders without requiring
           bank-account identifiers or wallet-address UX.
         </Lead>
       </Section>
@@ -325,7 +325,7 @@ Nigeria    → $20 AUSD →      United Kingdom
       <Section id="s18" n="13" title="Add money">
         <P>
           For the Metropolis release, Prism should not pretend to have a bank on-ramp that does not exist. Add Money
-          supports legitimate AUSD funding paths. The development / test environment may expose the Prism account
+          supports legitimate USDC funding paths. The development / test environment may expose the Prism account
           address, a QR code, copy-address, and a supported faucet / testnet flow. Future fiat funding systems can be
           integrated separately.
         </P>
@@ -355,7 +355,7 @@ Completed · September 4, 2026`}</Pre>
         <KV
           rows={[
             ["Network", "Monad"],
-            ["Asset", "AUSD"],
+            ["Asset", "USDC"],
             ["Transaction", "0x…"],
             ["Block", "…"],
             ["Status", "Confirmed"],
@@ -401,7 +401,7 @@ Completed · September 4, 2026`}</Pre>
            ▼
 ┌────────────────────────┐
 │        MONAD           │
-│ AUSD                   │
+│ USDC                   │
 │ Payment Router         │
 │ ClaimVault             │
 └──────┬─────────┬───────┘
@@ -433,16 +433,16 @@ Prism payment`}</Pre>
         </P>
       </Section>
 
-      <Section id="s8" n="19" title="AUSD">
+      <Section id="s8" n="19" title="USDC">
         <P>
-          Prism uses AUSD as its payment asset for the Metropolis implementation. The consumer UI presents ordinary
+          Prism uses USDC as its payment asset for the Metropolis implementation. The consumer UI presents ordinary
           dollar amounts ($20.00), not token portfolio information. Users should think “dollars,” not “ERC-20 token.”
-          AUSD is the monetary rail underneath Prism's consumer experience.
+          USDC is the monetary rail underneath Prism's consumer experience.
         </P>
       </Section>
 
       <Section id="s9" n="20" title="Gasless payments">
-        <P>A normal Prism user should be able to hold AUSD &gt; 0 and MON = 0 and still make a payment.</P>
+        <P>A normal Prism user should be able to hold USDC &gt; 0 and MON = 0 and still make a payment.</P>
         <P>
           Prism uses authorization-based transfers and relayed execution, so the user never needs to acquire or manage
           MON before sending. The product never displays “You need MON for gas.” This is a core product requirement, not
@@ -510,7 +510,7 @@ requestId · resolution reference · expiry · nonce`}</Pre>
           items={[
             "Payment-envelope validation",
             "Payment / reference integrity",
-            "AUSD execution",
+            "USDC execution",
             "Replay prevention",
             "Settlement events",
           ]}
@@ -568,7 +568,7 @@ GET  /v1/me`}</Pre>
         <Ul
           items={[
             "Chain reads",
-            "AUSD balance reads",
+            "USDC balance reads",
             "Simulation",
             "Transaction submission",
             "Receipt lookups",
@@ -607,7 +607,7 @@ Resolver result  ≠  permission to spend`}</Pre>
           head={["Private", "Potentially public"]}
           rows={[
             ["Raw phone alias", "Account addresses"],
-            ["Contact graph", "AUSD transfers"],
+            ["Contact graph", "USDC transfers"],
             ["PIN", "Contract interactions"],
             ["Passkey secret", "Transaction timestamps"],
             ["OTP", "Claim contract state"],
@@ -644,7 +644,7 @@ Resolver result  ≠  permission to spend`}</Pre>
             ["Resolver unavailable", "Retry; never guess"],
             ["Wrong PIN", "Retry / lockout"],
             ["Face ID unavailable", "PIN"],
-            ["Insufficient AUSD", "Add Money"],
+            ["Insufficient USDC", "Add Money"],
             ["User has zero MON", "No problem"],
             ["Relay unavailable", "Retry safely"],
             ["Submission ambiguous", "Reconcile first"],
@@ -661,7 +661,7 @@ Resolver result  ≠  permission to spend`}</Pre>
         <P>Prism exposes verifiable evidence for every consequential claim. Categories:</P>
         <Ul
           items={[
-            "Contract · Payment · Zero-MON · Mera · AUSD proof",
+            "Contract · Payment · Zero-MON · Mera · USDC proof",
             "Claim · Refund proof",
             "Resolver privacy proof",
             "Envio · Alchemy proof",
@@ -679,7 +679,7 @@ Resolver result  ≠  permission to spend`}</Pre>
         <P>Primary track: Consumer Products &amp; Payments. What each integration actually does:</P>
         <KV
           rows={[
-            ["Agora", "AUSD provides Prism's dollar-denominated payment rail."],
+            ["USDC", "Prism's dollar-denominated payment rail."],
             ["Mera", "The passkey-controlled consumer account layer."],
             ["Envio", "Indexed transaction and claim history."],
             ["Alchemy", "Live Monad RPC and transaction infrastructure."],

@@ -29,7 +29,7 @@ const CHAIN = [
   { tag: "Lookup", label: "Reachability" },
   { tag: "Identity", label: "Prism" },
   { tag: "Authority", label: "Mera passkey" },
-  { tag: "Settlement", label: "AUSD / Monad" },
+  { tag: "Settlement", label: "USDC / Monad" },
 ];
 const STATEMENTS: Array<[string, string]> = [
   ["Phone", "Discovery only."],
@@ -125,7 +125,7 @@ const INFRA: Infra[] = [
     meta: "Account authority · passkey-derived",
     status: "Integration target",
   },
-  { name: "Agora / AUSD", sentence: "Dollar-denominated payment asset.", meta: "Asset · AUSD", status: "Testnet" },
+  { name: "USDC", sentence: "Dollar-denominated payment asset.", meta: "Asset · USDC", status: "Testnet" },
   { name: "Monad", sentence: "Settlement.", meta: "Settlement · Monad", status: "Testnet" },
   {
     name: "Alchemy",
