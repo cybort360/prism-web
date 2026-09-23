@@ -9,7 +9,7 @@ import {
   ReachabilitySection,
   RequestSection,
 } from "@/components/prism/SectionsA";
-import { AuthoritySection, FinalCta, Footer, MonadSection } from "@/components/prism/SectionsB";
+import { AuthoritySection, FinalCta, Footer } from "@/components/prism/SectionsB";
 import { DevelopersPage } from "@/components/prism/Developers";
 import { DocsPage } from "@/components/prism/Docs";
 import { WhitepaperPage } from "@/components/prism/Whitepaper";
@@ -25,7 +25,6 @@ function Home() {
       <ClaimSection />
       <RequestSection />
       <AuthoritySection />
-      <MonadSection />
       <FinalCta />
     </main>
   );

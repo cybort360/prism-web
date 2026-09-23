@@ -33,20 +33,17 @@ If the site ever looks like "beige V1 with green buttons," the redesign has fail
 ## Copy rules
 
 Banned: revolutionary, seamless, future of finance, web3-native, next generation. Copy is short,
-dry, and verifiable. No blockchain jargon in product UI; chain terms are confined to proof
-metadata and the Infrastructure section.
+dry, and verifiable. Detailed protocol and provider information lives in the docs rather than a
+dedicated landing-page section.
 
 ## Evidence handling
 
-Nothing is presented as live. The proof surface is driven by a typed `PrismProof`
-(`src/components/prism/proof.ts`) defaulting to `DEMO_PROOF` (`environment: "demo"`), which shows
-a prominent **DEMO DATA** banner. Infrastructure providers are each labelled `Integration
-target` / `Testnet` / `Demo data`. Mainnet claims require verified live evidence and a real
-`PrismProof`.
+Nothing is presented as live. Proof requirements and infrastructure status remain documented on
+the docs and whitepaper routes. Mainnet claims still require verified live evidence.
 
 ## Accessibility
 
-- One `h1`, one `h2` per section, `h3` for infrastructure blocks; logical DOM order.
+- One `h1`, one `h2` per section, with logical DOM order.
 - All interactive demos are real `<button>`s / `<a>`s — keyboard operable, visible jade focus
   ring, `aria-expanded` on disclosures, `aria-pressed` on selectors, labelled nav regions.
 - `prefers-reduced-motion` honoured throughout.
@@ -67,7 +64,7 @@ at 1600px from 1728px up so ultrawide does not stretch.
 - **Developers is now a real route** (`/developers`, react-router) — quickstart, capabilities,
   a labelled access/status panel, and an access CTA. `/docs` and `/whitepaper` are long-form
   content pages sharing `dockit.tsx` (layout + prose/code/table primitives). Footer links: Product,
-  Security, Proof, Developers, Docs, Whitepaper are internal; "GitHub" opens
+  Security, Developers, Docs, Whitepaper are internal; "GitHub" opens
   `https://github.com/cybort360/prism-web` in a new tab. Section links use `/#id` so they work from any
   route (a small `ScrollManager` handles hash targets and top-on-route-change). No footer
   placeholders remain.

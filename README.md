@@ -68,17 +68,16 @@ not reappear in public copy.
 | 04   | Send before signup         | deep teal | Escrow → claim lifecycle → refund window                   |
 | 05   | Request                    | light     | Incoming request state machine (Pay → Authorize → Settled) |
 | 06   | Security                   | deep teal | Resolution chain, passkey authority, identity-change check |
-| 07   | Infrastructure             | light     | Five providers + collapsible proof surface                 |
 | CTA  | Find them. Pay them. Done. | deep teal | Closing call to action + footer                            |
 
 Components live in `src/components/prism/`:
-`Nav.tsx`, `Hero.tsx`, `SectionsA.tsx` (01–05), `SectionsB.tsx` (06–07 + CTA + footer),
-`primitives.tsx` (shared building blocks), `proof.ts` (typed proof model),
+`Nav.tsx`, `Hero.tsx`, `SectionsA.tsx` (01–05), `SectionsB.tsx` (06 + CTA + footer),
+`primitives.tsx` (shared building blocks),
 `Developers.tsx` (the `/developers` page).
 
 ### Routes
 
-- `/` — the marketing home (hero + sections 01–07 + CTA).
+- `/` — the marketing home (hero + sections 01–06 + CTA).
 - `/developers` — a dedicated developer page: quickstart, build-on-Prism capabilities, a
   labelled access/status panel, and an access CTA.
 - `/docs` — the full product documentation (`Docs.tsx`): 34 sections grouped into a sticky,
@@ -94,18 +93,10 @@ Components live in `src/components/prism/`:
 hosts, add an equivalent rewrite of all paths to `/index.html`. `vite dev` and `vite preview`
 handle the fallback automatically.
 
-## Evidence-mode handling
+## Evidence and infrastructure
 
-The proof surface renders a typed `PrismProof` (`src/components/prism/proof.ts`); it does not
-hard-code values into markup. The environment field controls how evidence is labelled:
-
-- `environment: "demo"` → a prominent **DEMO DATA** banner and per-field `· demo` suffixes.
-- `environment: "testnet"` → values shown as testnet.
-- `environment: "mainnet"` → only after verified live evidence.
-
-To wire live data, pass a real `PrismProof` to `ProofPanel` instead of `DEMO_PROOF`. No markup
-changes are required. Provider integrations that are not deployed are labelled per row in
-section 07 (`Integration target` / `Testnet` / `Demo data`) — the site makes no false live claims.
+Protocol architecture, provider roles, and proof requirements live in `/docs` and `/whitepaper`.
+The marketing home moves from section 06, Security, directly to the closing CTA.
 
 ## Fonts
 

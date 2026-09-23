@@ -6,7 +6,7 @@ import { PrismButton } from "./primitives";
 const LINKS = [
   { label: "Product", to: "/#product" },
   { label: "Security", to: "/#security" },
-  { label: "Proof", to: "/#proof" },
+  { label: "Docs", to: "/docs" },
   { label: "Developers", to: "/developers" },
 ];
 

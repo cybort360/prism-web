@@ -79,7 +79,7 @@ export function DevelopersPage() {
             <PrismButton href="mailto:developers@prism.app?subject=Prism%20developer%20access" variant="accent">
               Request developer access ↗
             </PrismButton>
-            <PrismButton href="/#proof" variant="ghostDark">
+            <PrismButton href="/docs#s27" variant="ghostDark">
               Read the architecture
             </PrismButton>
           </div>
