@@ -18,58 +18,65 @@ const GROUPS: TocGroup[] = [
       { id: "s5", n: "06", title: "Reachability" },
       { id: "s10", n: "07", title: "Direct payments" },
       { id: "s16", n: "08", title: "Payment requests" },
-      { id: "s13", n: "09", title: "Send before signup" },
-      { id: "s14", n: "10", title: "Claims" },
-      { id: "s15", n: "11", title: "Claim lifecycle" },
-      { id: "s17", n: "12", title: "Cross-border payments" },
-      { id: "s18", n: "13", title: "Add money" },
-      { id: "s19", n: "14", title: "Activity" },
-      { id: "s20", n: "15", title: "Receipts" },
-      { id: "s25", n: "16", title: "Recovery" },
+      { id: "s-dest", n: "09", title: "Request destinations" },
+      { id: "s13", n: "10", title: "Send before signup" },
+      { id: "s14", n: "11", title: "Claims" },
+      { id: "s15", n: "12", title: "Claim lifecycle" },
+      { id: "s-circles", n: "13", title: "Prism Circles" },
+      { id: "s-save", n: "14", title: "Save" },
+      { id: "s-recv", n: "15", title: "Receive from any chain" },
+      { id: "s-xreq", n: "16", title: "Cross-chain requests" },
+      { id: "s17", n: "17", title: "Cross-border payments" },
+      { id: "s18", n: "18", title: "Add money" },
+      { id: "s19", n: "19", title: "Activity" },
+      { id: "s20", n: "20", title: "Receipts" },
+      { id: "s25", n: "21", title: "Recovery" },
     ],
   },
   {
     label: "Protocol",
     items: [
-      { id: "s27", n: "17", title: "Architecture" },
-      { id: "s4", n: "18", title: "Mera accounts" },
-      { id: "s8", n: "19", title: "USDC" },
-      { id: "s9", n: "20", title: "Gasless payments" },
-      { id: "s6", n: "21", title: "Protected Alias Resolver" },
-      { id: "s11", n: "22", title: "Payment intent integrity" },
-      { id: "s12", n: "23", title: "Transaction truth" },
-      { id: "s28", n: "24", title: "Contracts" },
+      { id: "s27", n: "22", title: "Architecture" },
+      { id: "s4", n: "23", title: "Mera accounts" },
+      { id: "s8", n: "24", title: "USDC" },
+      { id: "s9", n: "25", title: "Gasless payments" },
+      { id: "s6", n: "26", title: "Protected Alias Resolver" },
+      { id: "s11", n: "27", title: "Payment intent integrity" },
+      { id: "s12", n: "28", title: "Transaction truth" },
+      { id: "s-aurora", n: "29", title: "Aurora Intents" },
+      { id: "s-safe", n: "30", title: "Circle authority" },
+      { id: "s28", n: "31", title: "Contracts" },
     ],
   },
   {
     label: "Developers",
     items: [
-      { id: "s29", n: "25", title: "API" },
-      { id: "s21", n: "26", title: "Envio" },
-      { id: "s22", n: "27", title: "Alchemy" },
+      { id: "s29", n: "32", title: "API" },
+      { id: "s21", n: "33", title: "Envio" },
+      { id: "s22", n: "34", title: "Alchemy" },
     ],
   },
   {
     label: "Security",
     items: [
-      { id: "s24", n: "28", title: "Security model" },
-      { id: "s23", n: "29", title: "Privacy model" },
-      { id: "s7", n: "30", title: "Identity-change protection" },
-      { id: "s26", n: "31", title: "Failure states" },
+      { id: "s24", n: "35", title: "Security model" },
+      { id: "s23", n: "36", title: "Privacy model" },
+      { id: "s7", n: "37", title: "Identity-change protection" },
+      { id: "s26", n: "38", title: "Failure states" },
     ],
   },
   {
     label: "Proof",
-    items: [{ id: "s31", n: "32", title: "Evidence and verification" }],
+    items: [{ id: "s31", n: "39", title: "Evidence and verification" }],
   },
   {
     label: "Metropolis",
-    items: [{ id: "s32", n: "33", title: "Metropolis integration" }],
+    items: [{ id: "s32", n: "40", title: "Metropolis integration" }],
   },
   {
     label: "Resources",
     items: [
-      { id: "s33", n: "34", title: "FAQ" },
+      { id: "s33", n: "41", title: "FAQ" },
       { href: "/whitepaper", title: "Whitepaper" },
       { href: "https://github.com/cybort360/prism-web", title: "GitHub" },
     ],
@@ -123,6 +130,8 @@ export function DocsPage() {
             ["Mera", "Proves who may authorize money."],
             ["USDC", "The money being moved."],
             ["Monad", "The settlement layer."],
+            ["Aurora Intents", "Carries value in from other chains."],
+            ["Safe", "The shared account behind a Circle."],
             ["Alchemy", "Live chain access."],
             ["Envio", "Indexed activity and evidence."],
           ]}
@@ -242,9 +251,33 @@ Lunch
           A payment fulfilling a request includes its opaque requestId, creating a cryptographic relationship between
           REQUEST → PAYMENT without leaking phone information.
         </P>
+        <h3 className="mt-8 text-[17px] font-medium text-ink">Universal requests</h3>
+        <P>
+          A request can be addressed to a specific person or left open. An open request becomes a shareable link and QR
+          that anyone can pay, without exposing the requester's account address. See{" "}
+          <a className="underline" href="#s-xreq">
+            cross-chain requests
+          </a>{" "}
+          for paying one from another chain.
+        </P>
       </Section>
 
-      <Section id="s13" n="09" title="Send before signup">
+      <Section id="s-dest" n="09" title="Request destinations">
+        <P>
+          When you ask for money, you choose where it should land. The default is your primary balance, but a request
+          can route its incoming funds straight into a Circle or into Save.
+        </P>
+        <Pre>{`DEPOSIT INTO
+[ Primary ]   [ Circle ]   [ Savings ]`}</Pre>
+        <P>
+          This second hop is non-custodial. At request time the requester signs the deposit authorization in advance, so
+          when the payment settles Prism can relay the sweep into the chosen destination without ever holding the funds
+          or needing the requester online. If the sweep cannot complete, the money stays in the requester's primary
+          balance rather than being lost.
+        </P>
+      </Section>
+
+      <Section id="s13" n="10" title="Send before signup">
         <P>One of Prism's defining capabilities is paying someone who does not yet use Prism.</P>
         <Pre>{`Octane selects David
         ↓
@@ -261,7 +294,7 @@ David receives invitation`}</Pre>
         </P>
       </Section>
 
-      <Section id="s14" n="10" title="Claims">
+      <Section id="s14" n="11" title="Claims">
         <P>A claim contains no public phone number.</P>
         <Pre>{`Claim {
   claimId
@@ -285,7 +318,7 @@ David authorizes claim
 ClaimVault releases USDC`}</Pre>
       </Section>
 
-      <Section id="s15" n="11" title="Claim lifecycle">
+      <Section id="s15" n="12" title="Claim lifecycle">
         <P>Successful flow:</P>
         <Pre>{`created → funded → waiting → recipient_verified
 → claimable → claiming → claimed`}</Pre>
@@ -307,7 +340,102 @@ ClaimVault releases USDC`}</Pre>
         <P>Funds must never become permanently stranded.</P>
       </Section>
 
-      <Section id="s17" n="12" title="Cross-border payments">
+      <Section id="s-circles" n="13" title="Prism Circles">
+        <P>
+          A Prism Circle is a shared USDC account for people who manage money together: a trip everyone pays into, a
+          household's shared costs, a small team with a float.
+        </P>
+        <Pre>{`SINGAPORE TRIP        $420.00
+4 people
+
+[ Add money ] [ Pay ] [ Withdraw ] [ Invite ]`}</Pre>
+        <P>
+          A Circle is backed by a Safe smart account (v1.4.1) deployed on Monad. The people who hold authority agree how
+          money moves — for example, two approvals before a payment leaves. Adding money and paying out are ordinary
+          Prism payments with an approval block on them: the same receipt and the same proof, plus a record of which
+          Circle the money came from, who asked, and who agreed.
+        </P>
+        <Lead>Prism never holds a Circle's balance and cannot move its money.</Lead>
+        <P>
+          Authority lives on Monad in the Safe, so a Circle keeps working even if Prism is offline. A Circle ends as a
+          lifecycle rather than a deletion: its history stays readable, and Prism never decides where a remaining
+          balance goes.
+        </P>
+        <h3 className="mt-8 text-[17px] font-medium text-ink">Approval-governed payments</h3>
+        <Pre>{`Member proposes a payment
+        ↓
+Needs N approvals
+        ↓
+Each admin approves on their own device
+        ↓
+Enough valid signatures over the exact Safe transaction
+        ↓
+Relayer executes on Monad`}</Pre>
+        <P>
+          Approvals are counted from signatures re-verified against the Safe's live owner set on every read, never from
+          a number Prism increments. A payment reads as complete only when the chain carries the Safe's ExecutionSuccess
+          and a matching USDC transfer — a row edited to look complete reads back as invalid.
+        </P>
+      </Section>
+
+      <Section id="s-save" n="14" title="Save">
+        <P>
+          Save lets a user move idle USDC toward yield (USDC → AUSD → earnAUSD) from the same screen they pay from.
+        </P>
+        <Pre>{`SAVE              $150.00
+Save more   ·   Withdraw`}</Pre>
+        <P>
+          Save ships as an announced preview. The flow and quotes are real, but no deposit is fabricated and no APY is
+          invented: the balance is always an onchain read, and a route provider only returns an executable plan once the
+          underlying earnAUSD substrate is independently verified. Until then Prism shows the experience honestly rather
+          than inventing a yield number.
+        </P>
+      </Section>
+
+      <Section id="s-recv" n="15" title="Receive from any chain">
+        <P>
+          Through Aurora Intents, a Prism user can receive into USDC on Monad from another chain, without the sender
+          needing a Monad account or the recipient leaving Prism.
+        </P>
+        <Pre>{`Funds arrive on chain X
+        ↓
+Aurora Intents route
+        ↓
+USDC credited to the recipient on Monad`}</Pre>
+        <Lead>Honest settlement: the route is real; on testnet the arrival is simulated.</Lead>
+        <P>
+          NEAR Intents, which Aurora sits on, carries Monad <strong>mainnet</strong>, not the testnet Prism is deployed
+          to. So on the current build the Aurora route and pricing are genuine, and the credit is a real testnet USDC
+          transfer to the recipient — only the “funds moved from chain X to Monad” event is simulated. Every screen says
+          so. This is a deployment-fidelity choice, not a claim that cross-chain value already settles end to end on
+          testnet.
+        </P>
+      </Section>
+
+      <Section id="s-xreq" n="16" title="Cross-chain requests">
+        <P>
+          A Prism payment request can be paid by someone who has no Prism app and no funds on Monad. They open the
+          request link in a browser, connect a wallet on their own chain, and Aurora Intents routes USDC to the
+          requester's Monad account — optionally sweeping it into the requester's Circle or Save.
+        </P>
+        <Pre>{`Payer opens the request link (any browser)
+        ↓
+Connects a wallet on their chain  (Base / Arbitrum / Ethereum)
+        ↓
+Aurora quote  →  pay  →  sign
+        ↓
+USDC lands in the requester's Monad account
+        ↓
+Optional sweep into Circle / Save`}</Pre>
+        <P>
+          The payer signs a message binding the exact request, amount and both parties; the backend verifies it before
+          crediting, and the open → paid transition stops a signature being reused. The Aurora quote, the wallet
+          connection and the signature are all real; as with inbound receive, settlement is simulated on testnet and
+          labelled that way. It runs as a separate pay-by-link web app talking to unauthenticated backend routes.
+        </P>
+      </Section>
+
+      <Section id="s17" n="17" title="Cross-border payments">
         <P>
           Prism's payment model is naturally cross-border because recipients are reached using human identifiers while
           USDC moves underneath.
@@ -322,7 +450,7 @@ Nigeria    → $20 USDC →      United Kingdom
         </Lead>
       </Section>
 
-      <Section id="s18" n="13" title="Add money">
+      <Section id="s18" n="18" title="Add money">
         <P>
           For the Metropolis release, Prism should not pretend to have a bank on-ramp that does not exist. Add Money
           supports legitimate USDC funding paths. The development / test environment may expose the Prism account
@@ -331,7 +459,7 @@ Nigeria    → $20 USDC →      United Kingdom
         </P>
       </Section>
 
-      <Section id="s19" n="14" title="Activity">
+      <Section id="s19" n="19" title="Activity">
         <P>Activity is Prism's human-readable financial history.</P>
         <Pre>{`TODAY
 
@@ -345,7 +473,7 @@ David    · Movie tickets   -$10.00   Waiting to be claimed`}</Pre>
         </P>
       </Section>
 
-      <Section id="s20" n="15" title="Receipts">
+      <Section id="s20" n="20" title="Receipts">
         <P>A Prism receipt has two layers. The consumer receipt:</P>
         <Pre>{`Tobi
 $20.00
@@ -363,7 +491,7 @@ Completed · September 4, 2026`}</Pre>
         />
       </Section>
 
-      <Section id="s25" n="16" title="Recovery">
+      <Section id="s25" n="21" title="Recovery">
         <P>Prism recovery must not collapse identity and authority.</P>
         <KV
           rows={[
@@ -378,7 +506,7 @@ Completed · September 4, 2026`}</Pre>
       </Section>
 
       {/* PROTOCOL */}
-      <Section id="s27" n="17" title="Architecture">
+      <Section id="s27" n="22" title="Architecture">
         <Pre>{`┌─────────────────────┐
 │      iPHONE         │
 │ Contacts            │
@@ -394,6 +522,8 @@ Completed · September 4, 2026`}</Pre>
 │ Prism Identity         │
 │ Payment Requests       │
 │ Claim Eligibility      │
+│ Circles / Save         │
+│ Aurora routing         │
 │ Relayer                │
 │ Reconciliation         │
 └──────────┬─────────────┘
@@ -404,6 +534,7 @@ Completed · September 4, 2026`}</Pre>
 │ USDC                   │
 │ Payment Router         │
 │ ClaimVault             │
+│ Circle Safe (v1.4.1)   │
 └──────┬─────────┬───────┘
        │         │
     Alchemy    Envio
@@ -411,7 +542,7 @@ Completed · September 4, 2026`}</Pre>
     chain      history`}</Pre>
       </Section>
 
-      <Section id="s4" n="18" title="Mera accounts">
+      <Section id="s4" n="23" title="Mera accounts">
         <P>
           Prism uses Mera as the user-facing cryptographic account layer. The objective is a real self-controlled
           account without forcing users to manage seed phrases, browser extensions, exported private keys or wallet
@@ -433,7 +564,7 @@ Prism payment`}</Pre>
         </P>
       </Section>
 
-      <Section id="s8" n="19" title="USDC">
+      <Section id="s8" n="24" title="USDC">
         <P>
           Prism uses USDC as its payment asset for the Metropolis implementation. The consumer UI presents ordinary
           dollar amounts ($20.00), not token portfolio information. Users should think “dollars,” not “ERC-20 token.”
@@ -441,7 +572,7 @@ Prism payment`}</Pre>
         </P>
       </Section>
 
-      <Section id="s9" n="20" title="Gasless payments">
+      <Section id="s9" n="25" title="Gasless payments">
         <P>A normal Prism user should be able to hold USDC &gt; 0 and MON = 0 and still make a payment.</P>
         <P>
           Prism uses authorization-based transfers and relayed execution, so the user never needs to acquire or manage
@@ -450,7 +581,7 @@ Prism payment`}</Pre>
         </P>
       </Section>
 
-      <Section id="s6" n="21" title="Protected Alias Resolver">
+      <Section id="s6" n="26" title="Protected Alias Resolver">
         <P>The resolver maps human aliases to Prism identities. For phones:</P>
         <Pre>{`selected phone
       ↓
@@ -470,6 +601,10 @@ Mera account`}</Pre>
   expiresAt
   resolutionId
 }`}</Pre>
+        <P>
+          Each resolution is signed and short-lived, and carries per-identity, per-IP and global rate limits so the
+          lookup cannot be turned into a bulk enumeration oracle.
+        </P>
         <h3 className="mt-8 text-[17px] font-medium text-ink">Fail closed</h3>
         <P>If Prism cannot confidently resolve a recipient, it does not guess. These fail rather than pay silently:</P>
         <Ul
@@ -483,7 +618,7 @@ Mera account`}</Pre>
         />
       </Section>
 
-      <Section id="s11" n="22" title="Payment intent integrity">
+      <Section id="s11" n="27" title="Payment intent integrity">
         <P>
           Prism binds what the user saw to what is executed. A signed payment envelope commits to consequential fields:
         </P>
@@ -495,7 +630,7 @@ requestId · resolution reference · expiry · nonce`}</Pre>
         </P>
       </Section>
 
-      <Section id="s12" n="23" title="Transaction truth">
+      <Section id="s12" n="28" title="Transaction truth">
         <P>Prism distinguishes transaction submission from actual payment completion. Internally:</P>
         <Pre>{`created → awaiting_authorization → ready → submitted
 → processing → confirming → confirmed → indexed
@@ -504,7 +639,47 @@ requestId · resolution reference · expiry · nonce`}</Pre>
         <P>Prism must never show “Sent” merely because an RPC endpoint accepted the transaction.</P>
       </Section>
 
-      <Section id="s28" n="24" title="Contracts">
+      <Section id="s-aurora" n="29" title="Aurora Intents">
+        <P>
+          Aurora Intents is Prism's cross-chain routing layer. It lets value arrive into USDC on Monad from another
+          chain (inbound receive) and lets a request be paid from another chain (cross-chain requests), so a payer never
+          needs a Monad account to reach a Prism user.
+        </P>
+        <Pre>{`origin asset on chain X
+        ↓
+Aurora quote  (EXACT_OUTPUT, dry run)
+        ↓
+route → USDC on Monad → recipient`}</Pre>
+        <h3 className="mt-8 text-[17px] font-medium text-ink">Honest settlement</h3>
+        <P>
+          NEAR Intents carries Monad <strong>mainnet</strong>, not the testnet Prism runs on, so cross-chain value does
+          not yet settle end to end on Prism's deployment. The quote and the wallet signature are real; the Monad-side
+          credit is a real testnet transfer; only the cross-chain arrival is simulated, behind an explicit demo mode,
+          and surfaced in the UI. The routing seam is real so it can be switched to live settlement on mainnet without a
+          product change.
+        </P>
+      </Section>
+
+      <Section id="s-safe" n="30" title="Circle authority">
+        <P>
+          A Circle's money and authority live in a Safe smart account (v1.4.1) on Monad. Prism owns the human layer — a
+          Circle's name, who was invited, what a proposal was for — while Monad owns the balance, the admin set and the
+          approval threshold.
+        </P>
+        <Pre>{`Circle
+├── Safe (owners, threshold)      → Monad
+├── proposals (what / who / why)  → Prism
+└── approvals (signatures)         → re-verified on read`}</Pre>
+        <P>
+          Prism never writes a balance, an owner or a threshold from a request; those are chain facts. A payment
+          proposal is a specific Safe transaction, and approvals are owner signatures over its exact digest. Changing the
+          recipient, amount or nonce after a proposal produces a digest the collected signatures do not authorize, so the
+          Safe rejects it. Transactions are CALL-only with zeroed gas-refund fields, so a second unreviewed payment
+          cannot hide inside one.
+        </P>
+      </Section>
+
+      <Section id="s28" n="31" title="Contracts">
         <h3 className="mt-6 text-[17px] font-medium text-ink">PrismPaymentRouter</h3>
         <Ul
           items={[
@@ -526,23 +701,32 @@ requestId · resolution reference · expiry · nonce`}</Pre>
             "Refunds",
           ]}
         />
+        <h3 className="mt-8 text-[17px] font-medium text-ink">Safe (Circles)</h3>
+        <P>
+          Circles use Safe's audited v1.4.1 smart account rather than a Prism-specific multisig. Every Safe address Prism
+          relies on — singleton, proxy factory, fallback handler — has its codehash checked against the official Safe
+          deployments on Monad before use.
+        </P>
         <P>No PhoneRegistry contract. No human-readable phone information onchain.</P>
       </Section>
 
       {/* DEVELOPERS */}
-      <Section id="s29" n="25" title="API">
+      <Section id="s29" n="32" title="API">
         <P>The API is domain-first. Raw ABI and calldata are not the primary vocabulary.</P>
         <Pre>{`POST /v1/otp/start
 POST /v1/otp/verify
 
-GET  /v1/resolve/handle/:handle
 POST /v1/resolve/phone
+POST /v1/resolve/handle
+POST /v1/resolve/handle/check
 
 POST /v1/payments/prepare
 POST /v1/payments/submit
 GET  /v1/payments/:id
 
 POST /v1/requests
+GET  /v1/requests/:id
+GET  /v1/requests/:id/public
 POST /v1/requests/:id/pay
 POST /v1/requests/:id/decline
 
@@ -550,11 +734,23 @@ POST /v1/claims/prepare
 POST /v1/claims/:id/claim
 POST /v1/claims/:id/refund
 
+POST /v1/circles
+POST /v1/circles/:id/pay
+POST /v1/circles/:id/proposals/:pid/approve
+
+GET  /v1/save
+POST /v1/save/submit
+POST /v1/save/withdraw
+
+POST /v1/pay/:requestId/quote      (cross-chain, unauthenticated)
+POST /v1/pay/:requestId/fulfill    (cross-chain, unauthenticated)
+
 GET  /v1/activity
 GET  /v1/me`}</Pre>
+        <P>Route names are indicative of the surface area; see the backend for exact shapes and auth.</P>
       </Section>
 
-      <Section id="s21" n="26" title="Envio">
+      <Section id="s21" n="33" title="Envio">
         <P>Envio powers Prism's indexed history and proof surfaces. Prism indexes consequential events such as:</P>
         <Ul items={["PaymentSettled", "ClaimFunded", "Claimed", "Refunded"]} />
         <P>
@@ -563,7 +759,7 @@ GET  /v1/me`}</Pre>
         </P>
       </Section>
 
-      <Section id="s22" n="27" title="Alchemy">
+      <Section id="s22" n="34" title="Alchemy">
         <P>Alchemy provides Prism's live Monad infrastructure. It is used for:</P>
         <Ul
           items={[
@@ -582,18 +778,20 @@ GET  /v1/me`}</Pre>
       </Section>
 
       {/* SECURITY */}
-      <Section id="s24" n="28" title="Security model">
+      <Section id="s24" n="35" title="Security model">
         <P>Security is built around explicit separation.</P>
         <Pre>{`Phone control    ≠  Prism account authority
 OTP              ≠  financial signing authority
 Backend session  ≠  Mera authority
-Resolver result  ≠  permission to spend`}</Pre>
+Resolver result  ≠  permission to spend
+Circle proposal  ≠  executed payment (needs signatures)`}</Pre>
         <h3 className="mt-8 text-[17px] font-medium text-ink">Key attack classes</h3>
         <Ul
           items={[
             "SIM swap · phone recycling · alias takeover",
             "Resolver compromise · replay · payment mutation",
             "Fraudulent claim · double claim · premature refund",
+            "Circle proposal tampering · approval forgery",
             "Relayer abuse · backend compromise · RPC inconsistency",
             "Indexing delay · ambiguous transaction submission",
             "Phishing · stolen / unlocked device",
@@ -601,7 +799,7 @@ Resolver result  ≠  permission to spend`}</Pre>
         />
       </Section>
 
-      <Section id="s23" n="29" title="Privacy model">
+      <Section id="s23" n="36" title="Privacy model">
         <P>Prism's privacy claims are intentionally narrow.</P>
         <KV
           head={["Private", "Potentially public"]}
@@ -620,7 +818,7 @@ Resolver result  ≠  permission to spend`}</Pre>
         </P>
       </Section>
 
-      <Section id="s7" n="30" title="Identity-change protection">
+      <Section id="s7" n="37" title="Identity-change protection">
         <P>
           Suppose a user previously paid Tobi. Prism remembers the previously trusted recipient identity. If Tobi's
           phone later resolves to a different Prism account, Prism blocks normal sending and the user sees:
@@ -632,7 +830,7 @@ Resolver result  ≠  permission to spend`}</Pre>
         </P>
       </Section>
 
-      <Section id="s26" n="31" title="Failure states">
+      <Section id="s26" n="38" title="Failure states">
         <P>Every path resolves. Documented behavior:</P>
         <KV
           head={["Failure", "Prism behavior"]}
@@ -642,6 +840,7 @@ Resolver result  ≠  permission to spend`}</Pre>
             ["Handle unknown", "Return to search"],
             ["Identity changed", "Block and review"],
             ["Resolver unavailable", "Retry; never guess"],
+            ["Resolution expired", "Re-resolve before signing"],
             ["Wrong PIN", "Retry / lockout"],
             ["Face ID unavailable", "PIN"],
             ["Insufficient USDC", "Add Money"],
@@ -649,6 +848,7 @@ Resolver result  ≠  permission to spend`}</Pre>
             ["Relay unavailable", "Retry safely"],
             ["Submission ambiguous", "Reconcile first"],
             ["Transaction reverted", "Failed, not Sent"],
+            ["Circle sweep fails", "Funds stay in primary balance"],
             ["Claim expired", "Refund"],
             ["Request expired", "Closed"],
             ["Indexing delayed", "Show confirmed / indexing state"],
@@ -657,12 +857,13 @@ Resolver result  ≠  permission to spend`}</Pre>
       </Section>
 
       {/* PROOF */}
-      <Section id="s31" n="32" title="Evidence and verification">
+      <Section id="s31" n="39" title="Evidence and verification">
         <P>Prism exposes verifiable evidence for every consequential claim. Categories:</P>
         <Ul
           items={[
             "Contract · Payment · Zero-MON · Mera · USDC proof",
             "Claim · Refund proof",
+            "Circle · approval-governed payment proof",
             "Resolver privacy proof",
             "Envio · Alchemy proof",
             "Mutation / replay proof",
@@ -675,12 +876,14 @@ Resolver result  ≠  permission to spend`}</Pre>
       </Section>
 
       {/* METROPOLIS */}
-      <Section id="s32" n="33" title="Metropolis integration">
+      <Section id="s32" n="40" title="Metropolis integration">
         <P>Primary track: Consumer Products &amp; Payments. What each integration actually does:</P>
         <KV
           rows={[
             ["USDC", "Prism's dollar-denominated payment rail."],
             ["Mera", "The passkey-controlled consumer account layer."],
+            ["Aurora Intents", "Cross-chain routing in and out (real quote; testnet settlement simulated)."],
+            ["Safe", "The audited smart account behind every Circle."],
             ["Envio", "Indexed transaction and claim history."],
             ["Alchemy", "Live Monad RPC and transaction infrastructure."],
             ["Monad", "Settlement."],
@@ -689,7 +892,7 @@ Resolver result  ≠  permission to spend`}</Pre>
       </Section>
 
       {/* RESOURCES */}
-      <Section id="s33" n="34" title="FAQ">
+      <Section id="s33" n="41" title="FAQ">
         <Faq q="Is Prism a wallet?">
           Underneath, every Prism user has a cryptographic account. But the product is designed around people and
           payments rather than wallet management.
@@ -702,6 +905,14 @@ Resolver result  ≠  permission to spend`}</Pre>
         <Faq q="Can I use Prism without Contacts permission?">Yes. You can use @handles, QR codes and links.</Faq>
         <Faq q="What if the recipient does not have Prism?">
           Prism can hold a claim for the intended recipient until they join and verify eligibility.
+        </Faq>
+        <Faq q="What is a Circle?">
+          A shared USDC account backed by a Safe on Monad. Members agree how money moves; Prism never holds or moves the
+          balance.
+        </Faq>
+        <Faq q="Can someone pay my Prism request from another chain?">
+          Yes. An open request link can be paid from Base, Arbitrum or Ethereum through Aurora Intents. On testnet the
+          route and signature are real and settlement is simulated.
         </Faq>
         <Faq q="Are Prism payments private?">
           Normal Monad settlement is public. Prism protects the link between private human aliases and public settlement

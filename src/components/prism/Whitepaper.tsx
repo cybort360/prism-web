@@ -17,23 +17,26 @@ const TOC: TocItem[] = [
   { id: "s12", n: "12", title: "Pre-user payment claims" },
   { id: "s13", n: "13", title: "Claim eligibility" },
   { id: "s14", n: "14", title: "Request protocol" },
-  { id: "s15", n: "15", title: "Cross-border model" },
-  { id: "s16", n: "16", title: "Canonical state" },
-  { id: "s17", n: "17", title: "Reconciliation model" },
-  { id: "s18", n: "18", title: "Security model" },
-  { id: "s19", n: "19", title: "Security properties" },
-  { id: "s20", n: "20", title: "Privacy analysis" },
-  { id: "s21", n: "21", title: "Trust assumptions" },
-  { id: "s22", n: "22", title: "Sponsor-native architecture" },
-  { id: "s23", n: "23", title: "Why Monad" },
-  { id: "s24", n: "24", title: "Product economics" },
-  { id: "s25", n: "25", title: "No Prism token" },
-  { id: "s26", n: "26", title: "Scope" },
-  { id: "s27", n: "27", title: "Explicit non-goals" },
-  { id: "s28", n: "28", title: "Future work" },
-  { id: "s29", n: "29", title: "Evidence methodology" },
-  { id: "s30", n: "30", title: "Evaluation criteria" },
-  { id: "s31", n: "31", title: "Conclusion" },
+  { id: "s-circles", n: "15", title: "Shared accounts" },
+  { id: "s-aurora", n: "16", title: "Cross-chain routing" },
+  { id: "s-save", n: "17", title: "Yield preview" },
+  { id: "s15", n: "18", title: "Cross-border model" },
+  { id: "s16", n: "19", title: "Canonical state" },
+  { id: "s17", n: "20", title: "Reconciliation model" },
+  { id: "s18", n: "21", title: "Security model" },
+  { id: "s19", n: "22", title: "Security properties" },
+  { id: "s20", n: "23", title: "Privacy analysis" },
+  { id: "s21", n: "24", title: "Trust assumptions" },
+  { id: "s22", n: "25", title: "Sponsor-native architecture" },
+  { id: "s23", n: "26", title: "Why Monad" },
+  { id: "s24", n: "27", title: "Product economics" },
+  { id: "s25", n: "28", title: "No Prism token" },
+  { id: "s26", n: "29", title: "Scope" },
+  { id: "s27", n: "30", title: "Explicit non-goals" },
+  { id: "s28", n: "31", title: "Future work" },
+  { id: "s29", n: "32", title: "Evidence methodology" },
+  { id: "s30", n: "33", title: "Evaluation criteria" },
+  { id: "s31", n: "34", title: "Conclusion" },
 ];
 
 export function WhitepaperPage() {
@@ -75,8 +78,10 @@ export function WhitepaperPage() {
           after identity verification and safely refundable if never claimed.
         </P>
         <P>
-          The result is a system in which the user experience resembles a modern consumer payment application while the
-          underlying settlement remains independently verifiable onchain.
+          The same separation extends to money held together — a shared account governed by a Safe on Monad — and to
+          value arriving from other chains through Aurora Intents. The result is a system in which the user experience
+          resembles a modern consumer payment application while the underlying settlement remains independently
+          verifiable onchain.
         </P>
       </Section>
 
@@ -155,7 +160,7 @@ S = application state and history`}</Pre>
         <Ul
           items={[
             "Authenticated queries",
-            "Rate limiting",
+            "Rate limiting (per identity, per IP, and global)",
             "Protected mappings",
             "Versioned aliases",
             "Short-lived resolution results",
@@ -264,17 +269,78 @@ MeraSign(P)`}</Pre>
         <Pre>{`R = {
   requestId,
   requester,
-  payer,
+  payer,       // null for an open / universal request
   amount,
   asset,
   memo,
+  destination, // primary | circle | savings
   expiry,
   status
 }`}</Pre>
-        <P>The payment envelope includes requestId.</P>
+        <P>
+          The payment envelope includes requestId. A request may name a payer or stay open as a shareable link; it may
+          also carry a destination so settled funds sweep into a Circle or into Save through a pre-signed second hop.
+        </P>
       </Section>
 
-      <Section id="s15" n="15" title="Cross-border model">
+      <Section id="s-circles" n="15" title="Shared accounts">
+        <P>
+          A Circle is a shared USDC account for people who manage money together. Its money and authority live in a Safe
+          smart account (v1.4.1) on Monad; Prism holds only the human layer around it.
+        </P>
+        <Pre>{`Circle
+├── Safe(owners, threshold)        // Monad: balance + authority
+├── proposal(what, who, memo)      // Prism: human context
+└── approval = owner signature     // re-verified against live owners`}</Pre>
+        <P>
+          Spending is governed by a threshold of owner signatures over an exact Safe transaction. Approvals are counted
+          from signatures re-verified against the live owner set on every read, never from a counter Prism increments, so
+          an owner removed on-chain stops counting automatically. Changing the recipient, amount or nonce after a
+          proposal yields a digest the collected signatures do not authorize.
+        </P>
+        <Lead>Prism never holds a Circle's balance and cannot move its money.</Lead>
+        <P>
+          Because authority is in the Safe, a Circle survives Prism being offline, and it ends as a lifecycle rather than
+          a deletion — history stays readable and Prism never decides where a remaining balance goes.
+        </P>
+      </Section>
+
+      <Section id="s-aurora" n="16" title="Cross-chain routing">
+        <P>
+          Prism reaches beyond Monad through Aurora Intents: value can arrive into USDC on Monad from another chain, and
+          an open request can be paid from another chain by someone with no Prism app and no Monad funds.
+        </P>
+        <Pre>{`origin asset on chain X
+        ↓
+Aurora quote (EXACT_OUTPUT)
+        ↓
+route → USDC on Monad → recipient
+        ↓
+optional sweep → Circle / Save`}</Pre>
+        <Lead>Honest settlement: the route and signature are real; on testnet the cross-chain arrival is simulated.</Lead>
+        <P>
+          NEAR Intents, which Aurora sits on, carries Monad <strong>mainnet</strong>, not the testnet Prism is deployed
+          to. On the current build the quote, the wallet connection and the payer's signature are genuine, and the
+          Monad-side credit is a real testnet transfer; only the event of value crossing from chain X to Monad is
+          simulated, behind an explicit demo mode and surfaced in the interface. The routing seam is built so it can be
+          switched to live mainnet settlement without changing the product.
+        </P>
+      </Section>
+
+      <Section id="s-save" n="17" title="Yield preview">
+        <P>
+          Save lets a user move idle USDC toward yield (USDC → AUSD → earnAUSD). It is included as an announced preview
+          rather than a settled claim.
+        </P>
+        <P>
+          The flow and quotes are real, but no deposit is fabricated and no APY is invented. Consistent with canonical
+          state, the position is always an onchain read; a route provider only returns an executable plan once the
+          earnAUSD substrate is independently verified. Until then the experience is shown honestly rather than
+          backfilled with an imagined return.
+        </P>
+      </Section>
+
+      <Section id="s15" n="18" title="Cross-border model">
         <P>
           Prism is cross-border at the digital-dollar settlement layer. Users in different jurisdictions can exchange
           USDC using human identifiers.
@@ -283,13 +349,15 @@ MeraSign(P)`}</Pre>
         <Ul items={["Fiat FX", "Local bank settlement", "Regulatory licensing", "Off-ramp coverage"]} />
       </Section>
 
-      <Section id="s16" n="16" title="Canonical state">
+      <Section id="s16" n="19" title="Canonical state">
         <KV
           head={["Fact", "Canonical source"]}
           rows={[
             ["USDC balance", "Monad"],
             ["Payment completion", "Monad"],
             ["Claim funds", "ClaimVault"],
+            ["Circle balance / owners / threshold", "Circle Safe (Monad)"],
+            ["Save position", "Vault (Monad)"],
             ["Alias mapping", "Prism Resolver"],
             ["Prism identity", "Prism service"],
             ["Passkey authority", "Mera"],
@@ -301,14 +369,14 @@ MeraSign(P)`}</Pre>
         />
       </Section>
 
-      <Section id="s17" n="17" title="Reconciliation model">
+      <Section id="s17" n="20" title="Reconciliation model">
         <Lead>SUBMITTED ≠ COMPLETED</Lead>
         <P>A transaction can be:</P>
         <Ul items={["Submitted", "Unknown", "Confirmed", "Reverted", "Indexed", "Reconciled"]} />
         <P>Prism's UX must reflect actual canonical state.</P>
       </Section>
 
-      <Section id="s18" n="18" title="Security model">
+      <Section id="s18" n="21" title="Security model">
         <P>Assets:</P>
         <Ul
           items={[
@@ -318,6 +386,7 @@ MeraSign(P)`}</Pre>
             "Handle aliases",
             "Resolver mapping",
             "Claim authorization key",
+            "Circle Safe authority",
             "Relayer balance",
             "Payment intent",
             "Activity history",
@@ -331,6 +400,7 @@ MeraSign(P)`}</Pre>
             "Malicious relayer",
             "Malicious recipient",
             "Compromised alias resolver",
+            "Malicious Circle member",
             "RPC failure",
             "Malicious dApp",
             "Stolen device",
@@ -339,7 +409,7 @@ MeraSign(P)`}</Pre>
         />
       </Section>
 
-      <Section id="s19" n="19" title="Security properties">
+      <Section id="s19" n="22" title="Security properties">
         <KV
           rows={[
             ["SP-1", "Phone possession alone cannot control existing funds."],
@@ -352,11 +422,12 @@ MeraSign(P)`}</Pre>
             ["SP-8", "A changed recipient identity cannot silently receive funds."],
             ["SP-9", "Submitted transactions cannot be represented as completed without confirmation."],
             ["SP-10", "Users do not need MON for supported standard payments."],
+            ["SP-11", "A Circle payment executes only with enough valid owner signatures over its exact transaction."],
           ]}
         />
       </Section>
 
-      <Section id="s20" n="20" title="Privacy analysis">
+      <Section id="s20" n="23" title="Privacy analysis">
         <KV
           head={["Dimension", "Status"]}
           rows={[
@@ -370,13 +441,15 @@ MeraSign(P)`}</Pre>
         />
       </Section>
 
-      <Section id="s21" n="21" title="Trust assumptions">
+      <Section id="s21" n="24" title="Trust assumptions">
         <P>The v1 system trusts:</P>
         <Ul
           items={[
             "The Prism resolver not to maliciously remap aliases",
             "The OTP provider for alias-possession signals",
             "The claim-authority service to issue correct eligibility",
+            "The Safe deployment and its audited smart-account code for Circle authority",
+            "Aurora Intents for honest cross-chain routing and pricing",
             "Relayer availability",
             "The Mera implementation for account authority",
             "Monad consensus for settlement",
@@ -385,17 +458,17 @@ MeraSign(P)`}</Pre>
         <P>Damage from any single failure is constrained by the separation of reachability, identity and authority.</P>
       </Section>
 
-      <Section id="s22" n="22" title="Sponsor-native architecture">
+      <Section id="s22" n="25" title="Sponsor-native architecture">
         <Pre>{`                 PRISM
 
     HUMAN INTERFACE + RESOLUTION
                   │
-       ┌──────────┼───────────┐
-       │          │           │
-      Mera       USDC       Envio
-   Authority     Money      History
-       │          │           │
-       └──────────┼───────────┘
+    ┌────────┬────┼────┬─────────┐
+    │        │    │    │         │
+   Mera    USDC  Safe Aurora   Envio
+ Authority Money Circle Routing History
+    │        │    │    │         │
+    └────────┴────┼────┴─────────┘
                   │
                 Monad
                   │
@@ -405,6 +478,8 @@ MeraSign(P)`}</Pre>
           rows={[
             ["Mera", "Account authority."],
             ["USDC", "The money being moved."],
+            ["Safe", "Shared-account authority for Circles."],
+            ["Aurora Intents", "Cross-chain routing in and out."],
             ["Envio", "Indexed history."],
             ["Monad", "Settlement."],
             ["Alchemy", "Live chain access."],
@@ -412,7 +487,7 @@ MeraSign(P)`}</Pre>
         />
       </Section>
 
-      <Section id="s23" n="23" title="Why Monad">
+      <Section id="s23" n="26" title="Why Monad">
         <P>
           Prism requires onchain settlement to behave closely enough to consumer-payment expectations that the chain can
           disappear from the user's interaction model.
@@ -422,7 +497,7 @@ MeraSign(P)`}</Pre>
         <P>without forcing chain management back into the product surface.</P>
       </Section>
 
-      <Section id="s24" n="24" title="Product economics">
+      <Section id="s24" n="27" title="Product economics">
         <P>No Prism token. No points required.</P>
         <P>Potential future business models, kept separate from the current implementation:</P>
         <Ul
@@ -437,7 +512,7 @@ MeraSign(P)`}</Pre>
         />
       </Section>
 
-      <Section id="s25" n="25" title="No Prism token">
+      <Section id="s25" n="28" title="No Prism token">
         <P>
           Prism does not require a native token to function. Consensus, gas and payment-asset responsibilities already
           belong to other primitives. Adding a token would introduce complexity without improving the core consumer
@@ -445,13 +520,16 @@ MeraSign(P)`}</Pre>
         </P>
       </Section>
 
-      <Section id="s26" n="26" title="Scope">
+      <Section id="s26" n="29" title="Scope">
         <Ul
           items={[
             "iPhone · Monad · USDC",
             "Phone aliases · @handles · QR · payment links",
-            "Direct payments · payment requests",
+            "Direct payments · payment requests (addressed and open)",
             "Pre-user claims · refunds",
+            "Shared accounts (Circles) governed by a Safe",
+            "Cross-chain receive and cross-chain request via Aurora Intents",
+            "Save (announced preview)",
             "Activity · receipts",
             "Alias rotation · identity-change safety",
             "Mera recovery · gas abstraction",
@@ -459,7 +537,7 @@ MeraSign(P)`}</Pre>
         />
       </Section>
 
-      <Section id="s27" n="27" title="Explicit non-goals">
+      <Section id="s27" n="30" title="Explicit non-goals">
         <Ul
           items={[
             "DEX · swap app · trading",
@@ -474,22 +552,23 @@ MeraSign(P)`}</Pre>
         />
       </Section>
 
-      <Section id="s28" n="28" title="Future work">
+      <Section id="s28" n="31" title="Future work">
         <KV
           rows={[
             ["Private contact discovery", "OPRF / PSI based lookup."],
+            ["Live cross-chain settlement", "Mainnet Aurora Intents in place of simulated arrival."],
+            ["Save execution", "Executable deposits once the earnAUSD substrate is verified."],
+            ["Circle spending limits", "Per-member allowances via an audited allowance module."],
             ["Additional aliases", "Email or merchant identifiers."],
             ["Fiat rails", "Localized on / off ramps."],
             ["Merchants", "Human-readable merchant Prism IDs."],
             ["Payment links", "Amount-bound invoices."],
-            ["Multi-device policies", "More sophisticated session management."],
-            ["Privacy", "Optional private settlement layers where technically justified."],
             ["Business APIs", "Payment requests, invoices and settlement reconciliation."],
           ]}
         />
       </Section>
 
-      <Section id="s29" n="29" title="Evidence methodology">
+      <Section id="s29" n="32" title="Evidence methodology">
         <KV
           head={["Level", "Meaning"]}
           rows={[
@@ -504,11 +583,12 @@ MeraSign(P)`}</Pre>
         <P>
           Any public Prism claim must match the achieved evidence level. “Prism supports claims” is valid as a live
           protocol capability only if a claim plus claim readback exists. “Prism uses USDC on Monad” requires real
-          configured and deployed execution proof.
+          configured and deployed execution proof. Cross-chain settlement is stated at the level it has reached: real
+          routing and signatures, simulated testnet arrival.
         </P>
       </Section>
 
-      <Section id="s30" n="30" title="Evaluation criteria">
+      <Section id="s30" n="33" title="Evaluation criteria">
         <P>Prism should prove:</P>
         <Ul
           items={[
@@ -517,6 +597,7 @@ MeraSign(P)`}</Pre>
             "Authorization → confirmation latency",
             "Claim conversion",
             "Request completion",
+            "Circle approval → execution integrity",
             "Resolver availability",
             "Indexing latency",
             "Zero-MON success",
@@ -527,16 +608,17 @@ MeraSign(P)`}</Pre>
         />
       </Section>
 
-      <Section id="s31" n="31" title="Conclusion">
+      <Section id="s31" n="34" title="Conclusion">
         <P>
           Blockchain payment infrastructure is typically organized around accounts, while consumer payments are
           organized around people. Prism attempts to close that gap without weakening financial authority.
         </P>
         <P>
           A person may be found through a phone number, handle, QR code or link. Those identifiers remain replaceable
-          reachability mechanisms. Financial authority belongs to a passkey-controlled Mera account. USDC represents the
-          value being transferred. Monad provides canonical settlement. Prism coordinates the relationship between those
-          layers while keeping their complexity beneath a consumer-native interface.
+          reachability mechanisms. Financial authority belongs to a passkey-controlled Mera account — held alone, or
+          shared through a Safe-governed Circle. USDC represents the value being transferred, reachable even from other
+          chains through Aurora Intents. Monad provides canonical settlement. Prism coordinates the relationship between
+          those layers while keeping their complexity beneath a consumer-native interface.
         </P>
         <Lead>Find them. Pay them. Done.</Lead>
       </Section>
