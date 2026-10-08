@@ -269,11 +269,11 @@ MeraSign(P)`}</Pre>
         <Pre>{`R = {
   requestId,
   requester,
-  payer,       // null for an open / universal request
+  payer,
   amount,
   asset,
   memo,
-  destination, // primary | circle | savings
+  destination,
   expiry,
   status
 }`}</Pre>
@@ -289,9 +289,9 @@ MeraSign(P)`}</Pre>
           smart account (v1.4.1) on Monad; Prism holds only the human layer around it.
         </P>
         <Pre>{`Circle
-├── Safe(owners, threshold)        // Monad: balance + authority
-├── proposal(what, who, memo)      // Prism: human context
-└── approval = owner signature     // re-verified against live owners`}</Pre>
+├── Safe (owners, threshold)       → Monad: balance + authority
+├── proposal (what, who, memo)     → Prism: human context
+└── approval = owner signature     → re-verified against live owners`}</Pre>
         <P>
           Spending is governed by a threshold of owner signatures over an exact Safe transaction. Approvals are counted
           from signatures re-verified against the live owner set on every read, never from a counter Prism increments, so
