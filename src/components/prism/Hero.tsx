@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { cn } from "@/lib/utils";
-import { Eyebrow, Mono, PrismButton } from "./primitives";
+import { Eyebrow, Mono, PrismButton, TESTFLIGHT_URL } from "./primitives";
 
 const STAGES = [
   { key: "contact", label: "Contact" },
@@ -247,7 +247,7 @@ export function Hero() {
               underneath.
             </p>
             <div className="anim-fade-up mt-8 flex flex-wrap gap-3" style={{ animationDelay: "400ms" }}>
-              <PrismButton href="#get" variant="accent">
+              <PrismButton href={TESTFLIGHT_URL} variant="accent" target="_blank" rel="noopener noreferrer">
                 Get Prism ↗
               </PrismButton>
               <PrismButton href="#product" variant="ghostDark">

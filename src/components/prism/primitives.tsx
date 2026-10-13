@@ -1,6 +1,9 @@
 import { useEffect, useRef, useState, type ReactNode } from "react";
 import { cn } from "@/lib/utils";
 
+/** Public TestFlight invite for the Prism iOS beta. */
+export const TESTFLIGHT_URL = "https://testflight.apple.com/join/PqDUKt5Z";
+
 export function useInView<T extends HTMLElement>(threshold = 0.2) {
   const ref = useRef<T | null>(null);
   const [visible, setVisible] = useState(false);
@@ -75,6 +78,8 @@ type ButtonProps = {
   type?: "button" | "submit";
   disabled?: boolean;
   "aria-pressed"?: boolean;
+  target?: string;
+  rel?: string;
 };
 export function PrismButton({
   children,

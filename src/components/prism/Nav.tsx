@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { cn } from "@/lib/utils";
-import { PrismButton } from "./primitives";
+import { PrismButton, TESTFLIGHT_URL } from "./primitives";
 
 const LINKS = [
   { label: "Product", to: "/#product" },
@@ -78,7 +78,7 @@ export function Nav() {
             ))}
           </nav>
           <span className="hidden sm:block">
-            <PrismButton href="/#get" size="sm" variant="accent">
+            <PrismButton href={TESTFLIGHT_URL} size="sm" variant="accent" target="_blank" rel="noopener noreferrer">
               Get Prism ↗
             </PrismButton>
           </span>
@@ -99,16 +99,29 @@ export function Nav() {
       <div className="mobile-nav-shell" data-open={open} aria-hidden={!open}>
         <nav aria-label="Mobile" className="border-t border-line bg-background">
           <ul className="shell flex flex-col py-2">
-            {[...LINKS, { label: "Get Prism ↗", to: "/#get" }].map((l) => (
+            {[...LINKS, { label: "Get Prism ↗", to: TESTFLIGHT_URL, external: true }].map((l) => (
               <li key={l.label} className="border-b border-line last:border-b-0">
-                <Link
-                  to={l.to}
-                  onClick={() => setOpen(false)}
-                  tabIndex={open ? undefined : -1}
-                  className="block py-3 font-mono text-[11px] tracking-[0.14em] uppercase"
-                >
-                  {l.label}
-                </Link>
+                {"external" in l && l.external ? (
+                  <a
+                    href={l.to}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    onClick={() => setOpen(false)}
+                    tabIndex={open ? undefined : -1}
+                    className="block py-3 font-mono text-[11px] tracking-[0.14em] uppercase"
+                  >
+                    {l.label}
+                  </a>
+                ) : (
+                  <Link
+                    to={l.to}
+                    onClick={() => setOpen(false)}
+                    tabIndex={open ? undefined : -1}
+                    className="block py-3 font-mono text-[11px] tracking-[0.14em] uppercase"
+                  >
+                    {l.label}
+                  </Link>
+                )}
               </li>
             ))}
           </ul>

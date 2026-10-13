@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import { Eyebrow, Mono, PrismButton, Reveal, Section } from "./primitives";
+import { Eyebrow, Mono, PrismButton, Reveal, Section, TESTFLIGHT_URL } from "./primitives";
 
 function AlertIcon({ className }: { className?: string }) {
   return (
@@ -129,7 +129,7 @@ export function FinalCta() {
           </h2>
         </Reveal>
         <div className="mt-12">
-          <PrismButton href="/#top" variant="accent">
+          <PrismButton href={TESTFLIGHT_URL} variant="accent" target="_blank" rel="noopener noreferrer">
             Get Prism ↗
           </PrismButton>
         </div>
