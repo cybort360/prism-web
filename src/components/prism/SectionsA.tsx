@@ -294,7 +294,7 @@ const REACH = [
   { icon: Ic.phone, label: "Phone", value: "+234 803 ••• ••67", status: "Verified" },
   { icon: Ic.at, label: "@handle", value: "@octane", status: "Public" },
   { icon: Ic.qr, label: "Payment QR", value: "Show QR", status: "" },
-  { icon: Ic.link, label: "Payment link", value: "prism.app/octane", status: "" },
+  { icon: Ic.link, label: "Payment link", value: "app.getprism.xyz/octane", status: "" },
 ];
 export function ReachabilitySection() {
   return (

@@ -57,7 +57,7 @@ const ACCESS: Array<{ label: string; value: string; status: Status }> = [
   { label: "SDK", value: "@prism/sdk", status: "Integration target" },
   { label: "REST / RPC", value: "via Alchemy", status: "Integration target" },
   { label: "Indexer", value: "Envio", status: "Demo data" },
-  { label: "Docs", value: "prism.app/docs", status: "Planned" },
+  { label: "Docs", value: "getprism.xyz/docs", status: "Planned" },
 ];
 
 /* ----------------------------------------------------------------- page */
@@ -76,7 +76,7 @@ export function DevelopersPage() {
             passkey holds authority, and Monad settles underneath.
           </p>
           <div className="anim-fade-up mt-8 flex flex-wrap gap-3">
-            <PrismButton href="mailto:developers@prism.app?subject=Prism%20developer%20access" variant="accent">
+            <PrismButton href="mailto:developers@getprism.xyz?subject=Prism%20developer%20access" variant="accent">
               Request developer access ↗
             </PrismButton>
             <PrismButton href="/docs#s27" variant="ghostDark">
@@ -199,7 +199,7 @@ export function DevelopersPage() {
             Developer access is invite-based during the build. Tell us what you want to ship and we will get you keys.
           </p>
           <div className="mt-10">
-            <PrismButton href="mailto:developers@prism.app?subject=Prism%20developer%20access" variant="accent">
+            <PrismButton href="mailto:developers@getprism.xyz?subject=Prism%20developer%20access" variant="accent">
               Request developer access ↗
             </PrismButton>
           </div>
